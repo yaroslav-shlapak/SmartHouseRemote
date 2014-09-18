@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smart house remote</string>
+    <string name="action_settings">Settings</string>
+    <string name="button1">button1</string>
+    <string name="button2">button2</string>
+    <string name="button3">button3</string>
+    <string name="button4">button4</string>
+    <string name="button5">button5</string>
+    <string name="button6">button6</string>
+    <string name="button7">button7</string>
+    <string name="button8">button8</string>
+    <string name="button9">button9</string>
+    
+    <string name="button1text">button1</string>
+    <string name="button2text">button2</string>
+    <string name="button3text">button3</string>
+    <string name="button4text">button4</string>
+    <string name="button5text">button5</string>
+    <string name="button6text">button6</string>
+    <string name="button7text">button7</string>
+    <string name="button8text">button8</string>
+    <string name="button9text">button9</string>
+    
+    <string name="defaultIP">192.168.0.103</string>
+    <string name="defaultPort">1153</string>
+    
+
+</resources>
