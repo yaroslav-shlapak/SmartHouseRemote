@@ -54,12 +54,24 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-		
-
+		return super.onCreateOptionsMenu(menu);
 	}
 	
-	 public void sendData(View view) {
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_settings:
+	        	openButtonSettings();
+	            return true;
+	        case R.id.ip_settings:
+	            openIpSettings();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	 private void sendData(View view) {
 	        Context context = getApplicationContext();
 
 	        String host = "192.168.0.103";

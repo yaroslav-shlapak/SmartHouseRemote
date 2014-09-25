@@ -26,5 +26,8 @@
     <string name="defaultIP">192.168.0.103</string>
     <string name="defaultPort">1153</string>
     
+    <string name="ic_action_settings">Buttons settings</string>
+    <string name="ip_settings">IP settings</string>
+    
 
 </resources>
