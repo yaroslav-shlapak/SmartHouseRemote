@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -21,6 +23,49 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			sendData(v);
 		}
+	};
+	
+	private OnLongClickListener onLongClickListener = new OnLongClickListener() {
+
+		@Override
+		public boolean onLongClick(View v) {
+			// TODO Auto-generated method stub
+			   switch(v.getId()){
+	           case R.id.button1:
+
+	        	   break;
+	           case R.id.button2:
+	        	   
+	        	   break;
+	           case R.id.button3:
+	        	   
+	        	   break;
+	           case R.id.button4:
+	        	   
+	        	   break;
+	           case R.id.button5:
+	        	   
+	        	   break;
+	           case R.id.button6:
+	        	   
+	        	   break;
+	           case R.id.button7:
+	        	   
+	        	   break;
+	           case R.id.button8:
+	        	   
+	        	   break;
+	           case R.id.button9:
+	        	   
+	        	   break;
+	           default:
+	        	   
+	        	   break;
+			   }
+	        	   
+			return false;
+		}
+		
 	};
 	
 	@Override
@@ -47,6 +92,16 @@ public class MainActivity extends Activity {
 		button7.setOnClickListener(onClickListener);
 		button8.setOnClickListener(onClickListener);
 		button9.setOnClickListener(onClickListener);
+		
+		button1.setOnLongClickListener(onLongClickListener);
+		button2.setOnLongClickListener(onLongClickListener);
+		button3.setOnLongClickListener(onLongClickListener);
+		button4.setOnLongClickListener(onLongClickListener);
+		button5.setOnLongClickListener(onLongClickListener);
+		button6.setOnLongClickListener(onLongClickListener);
+		button7.setOnLongClickListener(onLongClickListener);
+		button8.setOnLongClickListener(onLongClickListener);
+		button9.setOnLongClickListener(onLongClickListener);
 
 	}
 
@@ -71,7 +126,18 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
-	 private void sendData(View view) {
+	 private void openIpSettings() {
+		// TODO Auto-generated method stub
+		 Intent intent = new Intent(this, IpSettingsActivity.class);
+		 startActivity(intent);
+	}
+
+	private void openButtonSettings() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void sendData(View view) {
 	        Context context = getApplicationContext();
 
 	        String host = "192.168.0.103";
