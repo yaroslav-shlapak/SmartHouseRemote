@@ -64,15 +64,6 @@
         android:background="@android:drawable/btn_default" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_above="@+id/button5"
-        android:layout_toLeftOf="@+id/button5"
-        android:text="@string/button1"
-        android:background="@android:drawable/btn_default" />
-
-    <Button
         android:id="@+id/button9"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -89,5 +80,14 @@
         android:layout_toLeftOf="@+id/button5"
         android:text="@string/button4"
         android:background="@android:drawable/btn_default" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/button5"
+        android:layout_toLeftOf="@+id/button5"
+        android:background="@android:drawable/btn_default"
+        android:text="@string/button1" />
 
 </RelativeLayout>

@@ -25,6 +25,8 @@ public class MainActivity extends Activity {
 		}
 	};
 	
+	
+	
 	private OnLongClickListener onLongClickListener = new OnLongClickListener() {
 
 		@Override
@@ -67,6 +69,7 @@ public class MainActivity extends Activity {
 		}
 		
 	};
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -203,5 +206,6 @@ public class MainActivity extends Activity {
        }
 
 	 }
+	 
 
 }

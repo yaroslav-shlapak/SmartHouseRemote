@@ -6,16 +6,26 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class IpSettingsActivity extends Activity {
-	Context context;
-	SharedPreferences sharedPref;
+	private Context context;
+	private SharedPreferences sharedPrefIp;
+	//SharedPreferences sharedPrefPort;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ip_settings);
 		context = getApplicationContext();
-		sharedPref = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
+		sharedPrefIp = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
+		
+		EditText etIp = (EditText) findViewById(R.id.ip_address);
+		EditText etPort = (EditText) findViewById(R.id.port_address);
+		
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putString(getString(R.string.preference_ip), etIp.getText().toString());
+		editor.putString(getString(R.string.preference_port), etIp.getText().toString());
+		editor.commit();
 		
 		
 	}
