@@ -11,22 +11,26 @@ import android.widget.EditText;
 public class IpSettingsActivity extends Activity {
 	private Context context;
 	private SharedPreferences sharedPrefIp;
-	//SharedPreferences sharedPrefPort;
+	private SharedPreferences sharedPrefPort;
+	private EditText etIp, etPort;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ip_settings);
+		etIp = (EditText) findViewById(R.id.ip_address);
+		etPort = (EditText) findViewById(R.id.port_address);
 		context = getApplicationContext();
 		sharedPrefIp = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
+		sharedPrefPort = context.getSharedPreferences(getString(R.string.preference_port), Context.MODE_PRIVATE);
 		
-		EditText etIp = (EditText) findViewById(R.id.ip_address);
-		EditText etPort = (EditText) findViewById(R.id.port_address);
+		String defaultIp= getResources().getString(R.string.defaultIP);
+		String defaultPort = getResources().getString(R.string.defaultPort);
 		
-		SharedPreferences.Editor editor = sharedPref.edit();
-		editor.putString(getString(R.string.preference_ip), etIp.getText().toString());
-		editor.putString(getString(R.string.preference_port), etIp.getText().toString());
-		editor.commit();
+		String textIp = sharedPrefIp.getString(getString(R.string.preference_ip), defaultIp);
+		String textPort = sharedPrefPort.getString(getString(R.string.preference_port), defaultPort);
 		
+		etIp.setText(textIp);
+		etPort.setText(textPort);
 		
 	}
 
@@ -42,10 +46,16 @@ public class IpSettingsActivity extends Activity {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_undo:
-	        	
+	        	finish();
 	            return true;
 	        case R.id.action_accept:
-
+	    		SharedPreferences.Editor editorIp = sharedPrefIp.edit();
+	    		SharedPreferences.Editor editorPort = sharedPrefPort.edit();
+	    		editorIp.putString(getString(R.string.preference_ip), etIp.getText().toString());
+	    		editorPort.putString(getString(R.string.preference_port), etPort.getText().toString());
+	    		editorIp.commit();
+	    		editorPort.commit();
+	    		finish();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

@@ -26,6 +26,10 @@
             android:name="com.house.smart.remote.IpSettingsActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.house.smart.remote.ButtonsSettingsActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

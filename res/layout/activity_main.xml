@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/black"
     tools:context=".MainActivity" >
 
     <Button
@@ -15,8 +15,8 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/button5" 
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName5" />
 
     <Button
         android:id="@+id/button6"
@@ -24,8 +24,8 @@
         android:layout_height="100dp"
         android:layout_alignBottom="@+id/button5"
         android:layout_toRightOf="@+id/button5"
-        android:text="@string/button6" 
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName6" />
 
     <Button
         android:id="@+id/button2"
@@ -33,8 +33,8 @@
         android:layout_height="100dp"
         android:layout_above="@+id/button5"
         android:layout_toRightOf="@+id/button4"
-        android:text="@string/button2" 
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName2" />
 
     <Button
         android:id="@+id/button8"
@@ -42,8 +42,8 @@
         android:layout_height="100dp"
         android:layout_alignLeft="@+id/button5"
         android:layout_below="@+id/button5"
-        android:text="@string/button8"
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName8" />
 
     <Button
         android:id="@+id/button3"
@@ -51,8 +51,8 @@
         android:layout_height="100dp"
         android:layout_above="@+id/button5"
         android:layout_toRightOf="@+id/button5"
-        android:text="@string/button3" 
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName3" />
 
     <Button
         android:id="@+id/button7"
@@ -60,8 +60,8 @@
         android:layout_height="100dp"
         android:layout_below="@+id/button5"
         android:layout_toLeftOf="@+id/button5"
-        android:text="@string/button7"
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName7" />
 
     <Button
         android:id="@+id/button9"
@@ -69,8 +69,8 @@
         android:layout_height="100dp"
         android:layout_below="@+id/button5"
         android:layout_toRightOf="@+id/button5"
-        android:text="@string/button9"
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName9" />
 
     <Button
         android:id="@+id/button4"
@@ -78,8 +78,8 @@
         android:layout_height="100dp"
         android:layout_alignBottom="@+id/button5"
         android:layout_toLeftOf="@+id/button5"
-        android:text="@string/button4"
-        android:background="@android:drawable/btn_default" />
+        android:background="@android:drawable/btn_default"
+        android:text="@string/buttonName4" />
 
     <Button
         android:id="@+id/button1"
@@ -88,6 +88,6 @@
         android:layout_above="@+id/button5"
         android:layout_toLeftOf="@+id/button5"
         android:background="@android:drawable/btn_default"
-        android:text="@string/button1" />
+        android:text="@string/buttonName1" />
 
 </RelativeLayout>

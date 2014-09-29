@@ -137,7 +137,8 @@ public class MainActivity extends Activity {
 
 	private void openButtonSettings() {
 		// TODO Auto-generated method stub
-		
+		 Intent intent = new Intent(this, ButtonsSettingsActivity.class);
+		 startActivity(intent);
 	}
 
 	private void sendData(View view) {
@@ -184,23 +185,23 @@ public class MainActivity extends Activity {
 	 private String getButtonText(View v) {
 		   switch(v.getId()){
 	           case R.id.button1:
-	                return  getResources().getString(R.string.button1text);
+	                return  getResources().getString(R.string.textBurtton1);
 	           case R.id.button2:
-	        	   return  getResources().getString(R.string.button2text);
+	        	   return  getResources().getString(R.string.textBurtton2);
 	           case R.id.button3:
-	        	   return  getResources().getString(R.string.button3text);
+	        	   return  getResources().getString(R.string.textBurtton3);
 	           case R.id.button4:
-	        	   return  getResources().getString(R.string.button4text);
+	        	   return  getResources().getString(R.string.textBurtton4);
 	           case R.id.button5:
-	        	   return  getResources().getString(R.string.button5text);
+	        	   return  getResources().getString(R.string.textBurtton5);
 	           case R.id.button6:
-	        	   return  getResources().getString(R.string.button6text);
+	        	   return  getResources().getString(R.string.textBurtton6);
 	           case R.id.button7:
-	        	   return  getResources().getString(R.string.button7text);
+	        	   return  getResources().getString(R.string.textBurtton7);
 	           case R.id.button8:
-	        	   return  getResources().getString(R.string.button8text);
+	        	   return  getResources().getString(R.string.textBurtton8);
 	           case R.id.button9:
-	        	   return  getResources().getString(R.string.button9text);
+	        	   return  getResources().getString(R.string.textBurtton9);
 	           default:
 	        	   return "";
        }
