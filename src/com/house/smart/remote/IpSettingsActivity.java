@@ -10,8 +10,7 @@ import android.widget.EditText;
 
 public class IpSettingsActivity extends Activity {
 	private Context context;
-	private SharedPreferences sharedPrefIp;
-	private SharedPreferences sharedPrefPort;
+	private SharedPreferences sharedPrefIp, sharedPrefPort;
 	private EditText etIp, etPort;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class IpSettingsActivity extends Activity {
 		sharedPrefIp = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
 		sharedPrefPort = context.getSharedPreferences(getString(R.string.preference_port), Context.MODE_PRIVATE);
 		
-		String defaultIp= getResources().getString(R.string.defaultIP);
+		String defaultIp = getResources().getString(R.string.defaultIP);
 		String defaultPort = getResources().getString(R.string.defaultPort);
 		
 		String textIp = sharedPrefIp.getString(getString(R.string.preference_ip), defaultIp);

@@ -3,6 +3,7 @@ package com.house.smart.remote;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,60 +17,13 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
-	
-    private OnClickListener onClickListener = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			sendData(v);
-		}
-	};
-	
-	
-	
-	private OnLongClickListener onLongClickListener = new OnLongClickListener() {
-
-		@Override
-		public boolean onLongClick(View v) {
-			// TODO Auto-generated method stub
-			   switch(v.getId()){
-	           case R.id.button1:
-
-	        	   break;
-	           case R.id.button2:
-	        	   
-	        	   break;
-	           case R.id.button3:
-	        	   
-	        	   break;
-	           case R.id.button4:
-	        	   
-	        	   break;
-	           case R.id.button5:
-	        	   
-	        	   break;
-	           case R.id.button6:
-	        	   
-	        	   break;
-	           case R.id.button7:
-	        	   
-	        	   break;
-	           case R.id.button8:
-	        	   
-	        	   break;
-	           case R.id.button9:
-	        	   
-	        	   break;
-	           default:
-	        	   
-	        	   break;
-			   }
-	        	   
-			return false;
-		}
-		
-	};
-	
+	private Context context;
+	private SharedPreferences sharedPrefIp, sharedPrefPort;
+	private String textIp, textPort, defaultIp, defaultPort;
+	private SharedPreferences sharedPrefNameButon1, sharedPrefNameButon2, sharedPrefNameButon3, sharedPrefNameButon4, 
+	sharedPrefNameButon5, sharedPrefNameButon6, sharedPrefNameButon7, sharedPrefNameButon8, sharedPrefNameButon9;
+	private SharedPreferences sharedPrefStringButon1, sharedPrefStringButon2, sharedPrefStringButon3, sharedPrefStringButon4,
+	sharedPrefStringButon5, sharedPrefStringButon6, sharedPrefStringButon7, sharedPrefStringButon8, sharedPrefStringButon9;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +59,34 @@ public class MainActivity extends Activity {
 		button7.setOnLongClickListener(onLongClickListener);
 		button8.setOnLongClickListener(onLongClickListener);
 		button9.setOnLongClickListener(onLongClickListener);
-
+		
+		context = getApplicationContext();
+		sharedPrefIp = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
+		sharedPrefPort = context.getSharedPreferences(getString(R.string.preference_port), Context.MODE_PRIVATE);
+		
+		defaultIp = getResources().getString(R.string.defaultIP);
+		defaultPort = getResources().getString(R.string.defaultPort);
+		
+		sharedPrefNameButon1 = context.getSharedPreferences(getString(R.string.buttonName1), Context.MODE_PRIVATE);
+		sharedPrefNameButon2 = context.getSharedPreferences(getString(R.string.buttonName2), Context.MODE_PRIVATE);
+		sharedPrefNameButon3 = context.getSharedPreferences(getString(R.string.buttonName3), Context.MODE_PRIVATE);
+		sharedPrefNameButon4 = context.getSharedPreferences(getString(R.string.buttonName4), Context.MODE_PRIVATE);
+		sharedPrefNameButon5 = context.getSharedPreferences(getString(R.string.buttonName5), Context.MODE_PRIVATE);
+		sharedPrefNameButon6 = context.getSharedPreferences(getString(R.string.buttonName6), Context.MODE_PRIVATE);
+		sharedPrefNameButon7 = context.getSharedPreferences(getString(R.string.buttonName7), Context.MODE_PRIVATE);
+		sharedPrefNameButon8 = context.getSharedPreferences(getString(R.string.buttonName8), Context.MODE_PRIVATE);
+		sharedPrefNameButon9 = context.getSharedPreferences(getString(R.string.buttonName9), Context.MODE_PRIVATE);
+		
+		sharedPrefStringButon1 = context.getSharedPreferences(getString(R.string.textBurtton1), Context.MODE_PRIVATE);
+		sharedPrefStringButon2 = context.getSharedPreferences(getString(R.string.textBurtton2), Context.MODE_PRIVATE);
+		sharedPrefStringButon3 = context.getSharedPreferences(getString(R.string.textBurtton3), Context.MODE_PRIVATE);
+		sharedPrefStringButon4 = context.getSharedPreferences(getString(R.string.textBurtton4), Context.MODE_PRIVATE);
+		sharedPrefStringButon5 = context.getSharedPreferences(getString(R.string.textBurtton5), Context.MODE_PRIVATE);
+		sharedPrefStringButon6 = context.getSharedPreferences(getString(R.string.textBurtton6), Context.MODE_PRIVATE);
+		sharedPrefStringButon7 = context.getSharedPreferences(getString(R.string.textBurtton7), Context.MODE_PRIVATE);
+		sharedPrefStringButon8 = context.getSharedPreferences(getString(R.string.textBurtton8), Context.MODE_PRIVATE);
+		sharedPrefStringButon9 = context.getSharedPreferences(getString(R.string.textBurtton9), Context.MODE_PRIVATE);
+			
 	}
 
 	@Override
@@ -143,8 +124,11 @@ public class MainActivity extends Activity {
 
 	private void sendData(View view) {
 	        Context context = getApplicationContext();
+			
+			textIp = sharedPrefIp.getString(getString(R.string.preference_ip), defaultIp);
+			textPort = sharedPrefPort.getString(getString(R.string.preference_port), defaultPort);
 
-	        String host = "192.168.0.103";
+	        String host = textIp;
 	        if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
 	            CharSequence text = "Error: Invalid IP Address";
 	            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
@@ -152,7 +136,7 @@ public class MainActivity extends Activity {
 	            return;
 	        }
 
-	        String port = "5001";
+	        String port = textPort;
 	        if (!port.matches("^(6553[0-5]|655[0-2]\\d|65[0-4]\\d\\d|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}|0)$")) {
 	            CharSequence text = "Error: Invalid Port Number";
 	            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
@@ -207,6 +191,59 @@ public class MainActivity extends Activity {
        }
 
 	 }
+	    private OnClickListener onClickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				sendData(v);
+			}
+		};
+		
+		
+		
+		private OnLongClickListener onLongClickListener = new OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				// TODO Auto-generated method stub
+				   switch(v.getId()){
+		           case R.id.button1:
+
+		        	   break;
+		           case R.id.button2:
+		        	   
+		        	   break;
+		           case R.id.button3:
+		        	   
+		        	   break;
+		           case R.id.button4:
+		        	   
+		        	   break;
+		           case R.id.button5:
+		        	   
+		        	   break;
+		           case R.id.button6:
+		        	   
+		        	   break;
+		           case R.id.button7:
+		        	   
+		        	   break;
+		           case R.id.button8:
+		        	   
+		        	   break;
+		           case R.id.button9:
+		        	   
+		        	   break;
+		           default:
+		        	   
+		        	   break;
+				   }
+		        	   
+				return false;
+			}
+			
+		};
+		
 	 
 
 }

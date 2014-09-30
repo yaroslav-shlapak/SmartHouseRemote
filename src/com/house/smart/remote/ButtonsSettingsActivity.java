@@ -23,7 +23,7 @@ public class ButtonsSettingsActivity extends Activity {
 		sharedPrefIp = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
 		sharedPrefPort = context.getSharedPreferences(getString(R.string.preference_port), Context.MODE_PRIVATE);
 		
-		String defaultIp= getResources().getString(R.string.defaultIP);
+		String defaultIp = getResources().getString(R.string.defaultIP);
 		String defaultPort = getResources().getString(R.string.defaultPort);
 		
 		String textIp = sharedPrefIp.getString(getString(R.string.preference_ip), defaultIp);
