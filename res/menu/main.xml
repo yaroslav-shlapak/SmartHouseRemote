@@ -1,12 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item android:id="@+id/action_settings"
-          android:icon="@drawable/ic_action_settings"
-          android:title="@string/ic_action_settings"
-          android:showAsAction="ifRoom" />
-    
+   
     <item android:id="@+id/ip_settings"
-          android:icon="@drawable/ic_action_network_wifi"
+          android:icon="@drawable/ic_action_settings"
           android:title="@string/ip_settings"
           android:showAsAction="ifRoom" />
     

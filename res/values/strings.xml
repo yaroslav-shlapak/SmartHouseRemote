@@ -3,24 +3,24 @@
 
     <string name="app_name">Smart house remote</string>
     <string name="action_settings">Settings</string>
-    <string name="buttonName1">button1</string>
-    <string name="buttonName2">button2</string>
-    <string name="buttonName3">button3</string>
-    <string name="buttonName4">button4</string>
-    <string name="buttonName5">button5</string>
-    <string name="buttonName6">button6</string>
-    <string name="buttonName7">button7</string>
-    <string name="buttonName8">button8</string>
-    <string name="buttonName9">button9</string>
-    <string name="textBurtton1">button1</string>
-    <string name="textBurtton2">button2</string>
-    <string name="textBurtton3">button3</string>
-    <string name="textBurtton4">button4</string>
-    <string name="textBurtton5">button5</string>
-    <string name="textBurtton6">button6</string>
-    <string name="textBurtton7">button7</string>
-    <string name="textBurtton8">button8</string>
-    <string name="textBurtton9">button9</string>
+    <string name="buttonName1">1</string>
+    <string name="buttonName2">2</string>
+    <string name="buttonName3">3</string>
+    <string name="buttonName4">4</string>
+    <string name="buttonName5">5</string>
+    <string name="buttonName6">6</string>
+    <string name="buttonName7">7</string>
+    <string name="buttonName8">8</string>
+    <string name="buttonName9">9</string>
+    <string name="textButton1">sending string 1</string>
+    <string name="textButton2">sending string 2</string>
+    <string name="textButton3">sending string 3</string>
+    <string name="textButton4">sending string 4</string>
+    <string name="textButton5">sending string 5</string>
+    <string name="textButton6">sending string 6</string>
+    <string name="textButton7">sending string 7</string>
+    <string name="textButton8">sending string 8</string>
+    <string name="textButton9">sending string 9</string>
     <string name="defaultIP">192.168.0.103</string>
     <string name="defaultPort">1153</string>
     <string name="ic_action_settings">Buttons settings</string>
@@ -33,6 +33,6 @@
     <string name="preference_port">preference_port</string>
     
     <string name="textViewButtonName">Button name</string>
-    <string name="textViewButtonString">Button send string</string>
+    <string name="textViewButtonString">Button sending string</string>
 
 </resources>

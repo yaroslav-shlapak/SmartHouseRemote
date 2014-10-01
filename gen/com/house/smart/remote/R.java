@@ -196,9 +196,8 @@ public final class R {
         public static final int status_bar_opened_default_background=0x7f020009;
     }
     public static final class id {
-        public static final int action_accept=0x7f090015;
-        public static final int action_settings=0x7f090012;
-        public static final int action_undo=0x7f090014;
+        public static final int action_accept=0x7f090014;
+        public static final int action_undo=0x7f090013;
         public static final int button1=0x7f090011;
         public static final int button2=0x7f09000b;
         public static final int button3=0x7f09000e;
@@ -211,7 +210,7 @@ public final class R {
         public static final int buttonName=0x7f090003;
         public static final int buttonString=0x7f090004;
         public static final int ip_address=0x7f090007;
-        public static final int ip_settings=0x7f090013;
+        public static final int ip_settings=0x7f090012;
         public static final int port_address=0x7f090008;
         public static final int relativeLayout1=0x7f090000;
         public static final int textViewButtonName=0x7f090001;
@@ -249,15 +248,15 @@ public final class R {
         public static final int ip_settings=0x7f060017;
         public static final int preference_ip=0x7f06001c;
         public static final int preference_port=0x7f06001d;
-        public static final int textBurtton1=0x7f06000b;
-        public static final int textBurtton2=0x7f06000c;
-        public static final int textBurtton3=0x7f06000d;
-        public static final int textBurtton4=0x7f06000e;
-        public static final int textBurtton5=0x7f06000f;
-        public static final int textBurtton6=0x7f060010;
-        public static final int textBurtton7=0x7f060011;
-        public static final int textBurtton8=0x7f060012;
-        public static final int textBurtton9=0x7f060013;
+        public static final int textButton1=0x7f06000b;
+        public static final int textButton2=0x7f06000c;
+        public static final int textButton3=0x7f06000d;
+        public static final int textButton4=0x7f06000e;
+        public static final int textButton5=0x7f06000f;
+        public static final int textButton6=0x7f060010;
+        public static final int textButton7=0x7f060011;
+        public static final int textButton8=0x7f060012;
+        public static final int textButton9=0x7f060013;
         public static final int textViewButtonName=0x7f06001e;
         public static final int textViewButtonString=0x7f06001f;
         public static final int textViewIp=0x7f06001a;

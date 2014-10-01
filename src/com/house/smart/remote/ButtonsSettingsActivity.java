@@ -10,55 +10,64 @@ import android.widget.EditText;
 
 public class ButtonsSettingsActivity extends Activity {
 	private Context context;
-	private SharedPreferences sharedPrefIp;
-	private SharedPreferences sharedPrefPort;
-	private EditText etIp, etPort;
-	
+	private SharedPreferences sharedPrefName, sharedPrefString;
+	private EditText buttonName, buttonString;
+	int buttonNameInt = 0, buttonStringInt = 1;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_ip_settings);
-		etIp = (EditText) findViewById(R.id.ip_address);
-		etPort = (EditText) findViewById(R.id.port_address);
+		setContentView(R.layout.activity_button_settings);
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			buttonNameInt = extras.getInt(MainActivity.BUTTON_NAME);
+			buttonStringInt = extras.getInt(MainActivity.BUTTON_STRING);
+		}
+		buttonName = (EditText) findViewById(R.id.buttonName);
+		buttonString = (EditText) findViewById(R.id.buttonString);
+
 		context = getApplicationContext();
-		sharedPrefIp = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
-		sharedPrefPort = context.getSharedPreferences(getString(R.string.preference_port), Context.MODE_PRIVATE);
-		
-		String defaultIp = getResources().getString(R.string.defaultIP);
-		String defaultPort = getResources().getString(R.string.defaultPort);
-		
-		String textIp = sharedPrefIp.getString(getString(R.string.preference_ip), defaultIp);
-		String textPort = sharedPrefPort.getString(getString(R.string.preference_port), defaultPort);
-		
-		etIp.setText(textIp);
-		etPort.setText(textPort);
-		
+		sharedPrefName = context.getSharedPreferences(
+				getString(buttonNameInt), Context.MODE_PRIVATE);
+		sharedPrefString = context.getSharedPreferences(
+				getString(buttonStringInt), Context.MODE_PRIVATE);
+
+		String textButtonName = sharedPrefName.getString(
+				getString(buttonNameInt), getResources().getString(buttonNameInt));
+		String textButtonString = sharedPrefString.getString(
+				getString(buttonStringInt), getResources().getString(buttonStringInt));
+
+		buttonName.setText(textButtonName);
+		buttonString.setText(textButtonString);
+
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_ip_settings, menu);
 		return super.onCreateOptionsMenu(menu);
-		
-		
+
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-	    switch (item.getItemId()) {
-	        case R.id.action_undo:
-	        	finish();
-	            return true;
-	        case R.id.action_accept:
-	    		SharedPreferences.Editor editorIp = sharedPrefIp.edit();
-	    		SharedPreferences.Editor editorPort = sharedPrefPort.edit();
-	    		editorIp.putString(getString(R.string.preference_ip), etIp.getText().toString());
-	    		editorPort.putString(getString(R.string.preference_port), etPort.getText().toString());
-	    		editorIp.commit();
-	    		editorPort.commit();
-	    		finish();
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.action_undo:
+			finish();
+			return true;
+		case R.id.action_accept:
+			SharedPreferences.Editor editorName = sharedPrefName.edit();
+			SharedPreferences.Editor editorString = sharedPrefString.edit();
+			editorName.putString(getString(buttonNameInt), buttonName
+					.getText().toString());
+			editorString.putString(getString(buttonStringInt), buttonString
+					.getText().toString());
+			editorName.commit();
+			editorString.commit();
+			finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }
