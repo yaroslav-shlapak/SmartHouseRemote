@@ -26,12 +26,23 @@
         <activity
             android:name="com.house.smart.remote.IpSettingsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"             
+            android:parentActivityName="com.house.smart.remote.MainActivity" >
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.house.smart.remote.MainActivity" />
         </activity>
         <activity
             android:name="com.house.smart.remote.ButtonsSettingsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"         
+            android:parentActivityName="com.house.smart.remote.MainActivity" >
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.house.smart.remote.MainActivity" />
+
         </activity>
     </application>
 

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.EditText;
 
 public class ButtonsSettingsActivity extends Activity {
@@ -17,6 +18,8 @@ public class ButtonsSettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_button_settings);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.EditText;
 
 public class IpSettingsActivity extends Activity {
@@ -16,6 +17,9 @@ public class IpSettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ip_settings);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		etIp = (EditText) findViewById(R.id.ip_address);
 		etPort = (EditText) findViewById(R.id.port_address);
 		context = getApplicationContext();
