@@ -17,19 +17,24 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	public final static String BUTTON_NAME = "com.house.smart.remote.BUTTON.NAME";
 	public final static String BUTTON_STRING = "com.house.smart.remote.BUTTON.STRIMG";
+	private final static int BUTTONS_NUMBER = 9;
 	private Context context;
 	private SharedPreferences sharedPrefIp, sharedPrefPort;
 	private String textIp, textPort, defaultIp, defaultPort;
-	private SharedPreferences sharedPrefNameButon1, sharedPrefNameButon2,
-			sharedPrefNameButon3, sharedPrefNameButon4, sharedPrefNameButon5,
-			sharedPrefNameButon6, sharedPrefNameButon7, sharedPrefNameButon8,
-			sharedPrefNameButon9;
-	private SharedPreferences sharedPrefStringButon1, sharedPrefStringButon2,
-			sharedPrefStringButon3, sharedPrefStringButon4,
-			sharedPrefStringButon5, sharedPrefStringButon6,
-			sharedPrefStringButon7, sharedPrefStringButon8,
-			sharedPrefStringButon9;
-	private Button button1, button2, button3, button4, button5, button6, button7, button8, button9;
+	
+	private SharedPreferences [] sharedPrefNameButton = new SharedPreferences[BUTTONS_NUMBER];
+	private SharedPreferences [] sharedPrefStringButton = new SharedPreferences[BUTTONS_NUMBER];
+	private Button[] buttons = new Button[BUTTONS_NUMBER];
+	
+	private final static int[] buttonsRid = {R.id.button1, R.id.button2, R.id.button3, R.id.button4, 
+		R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9};
+	
+	private final static int[] buttonStrNames = {R.string.buttonName1, R.string.buttonName2, R.string.buttonName3, 
+		R.string.buttonName4, R.string.buttonName5, R.string.buttonName6, R.string.buttonName7, R.string.buttonName8,
+		R.string.buttonName9};
+	private final static int[] buttonStrStrings = {R.string.textButton1, R.string.textButton2, R.string.textButton3, 
+		R.string.textButton4, R.string.textButton5, R.string.textButton6, R.string.textButton7, R.string.textButton8,
+		R.string.textButton9};
 
 	private OnClickListener onClickListener = new OnClickListener() {
 
@@ -44,60 +49,17 @@ public class MainActivity extends Activity {
 		@Override
 		public boolean onLongClick(View v) {
 			// TODO Auto-generated method stub
-			Intent i = new Intent(getApplicationContext(),
+			Intent intent = new Intent(getApplicationContext(),
 					ButtonsSettingsActivity.class);
-
-			switch (v.getId()) {
-			case R.id.button1:
-				i.putExtra(BUTTON_NAME, R.string.buttonName1);
-				i.putExtra(BUTTON_STRING, R.string.textButton1);
-				startActivity(i);
-				break;
-			case R.id.button2:
-				i.putExtra(BUTTON_NAME, R.string.buttonName2);
-				i.putExtra(BUTTON_STRING, R.string.textButton2);
-				startActivity(i);
-				break;
-			case R.id.button3:
-				i.putExtra(BUTTON_NAME, R.string.buttonName3);
-				i.putExtra(BUTTON_STRING, R.string.textButton3);
-				startActivity(i);
-				break;
-			case R.id.button4:
-				i.putExtra(BUTTON_NAME, R.string.buttonName4);
-				i.putExtra(BUTTON_STRING, R.string.textButton4);
-				startActivity(i);
-				break;
-			case R.id.button5:
-				i.putExtra(BUTTON_NAME, R.string.buttonName5);
-				i.putExtra(BUTTON_STRING, R.string.textButton5);
-				startActivity(i);
-				break;
-			case R.id.button6:
-				i.putExtra(BUTTON_NAME, R.string.buttonName6);
-				i.putExtra(BUTTON_STRING, R.string.textButton6);
-				startActivity(i);
-				break;
-			case R.id.button7:
-				i.putExtra(BUTTON_NAME, R.string.buttonName7);
-				i.putExtra(BUTTON_STRING, R.string.textButton7);
-				startActivity(i);
-				break;
-			case R.id.button8:
-				i.putExtra(BUTTON_NAME, R.string.buttonName8);
-				i.putExtra(BUTTON_STRING, R.string.textButton8);
-				startActivity(i);
-				break;
-			case R.id.button9:
-				i.putExtra(BUTTON_NAME, R.string.buttonName9);
-				i.putExtra(BUTTON_STRING, R.string.textButton9);
-				startActivity(i);
-				break;
-			default:
-
-				break;
+			
+			for(int i = 0; i < BUTTONS_NUMBER; i++) {
+				if(buttonsRid[i] == v.getId()) {
+					intent.putExtra(BUTTON_NAME, buttonStrNames[i]);
+					intent.putExtra(BUTTON_STRING, buttonStrStrings[i]);
+					startActivity(intent);
+					break;
+				}
 			}
-
 			return true;
 		}
 
@@ -126,107 +88,41 @@ public class MainActivity extends Activity {
 
 	private void initButtonsNames() {
 		// TODO Auto-generated method stub
-		button1.setText(sharedPrefNameButon1.getString(
-				getString(R.string.buttonName1), getResources().getString(R.string.buttonName1)));
-		button2.setText(sharedPrefNameButon2.getString(
-				getString(R.string.buttonName2), getResources().getString(R.string.buttonName2)));
-		button3.setText(sharedPrefNameButon3.getString(
-				getString(R.string.buttonName3), getResources().getString(R.string.buttonName3)));
-		button4.setText(sharedPrefNameButon4.getString(
-				getString(R.string.buttonName4), getResources().getString(R.string.buttonName4)));
-		button5.setText(sharedPrefNameButon5.getString(
-				getString(R.string.buttonName5), getResources().getString(R.string.buttonName5)));
-		button6.setText(sharedPrefNameButon6.getString(
-				getString(R.string.buttonName6), getResources().getString(R.string.buttonName6)));
-		button7.setText(sharedPrefNameButon7.getString(
-				getString(R.string.buttonName7), getResources().getString(R.string.buttonName7)));
-		button8.setText(sharedPrefNameButon8.getString(
-				getString(R.string.buttonName8), getResources().getString(R.string.buttonName8)));
-		button9.setText(sharedPrefNameButon9.getString(
-				getString(R.string.buttonName9), getResources().getString(R.string.buttonName9)));
+		for(int i = 0; i < BUTTONS_NUMBER; i++)
+			buttons[i].setText(sharedPrefNameButton[i].getString(
+					getString(buttonStrNames[i]), getResources().getString(buttonStrNames[i])));
 	}
 
 	private void initOnLongClickListeners() {
 		// TODO Auto-generated method stub
-		button1.setOnLongClickListener(onLongClickListener);
-		button2.setOnLongClickListener(onLongClickListener);
-		button3.setOnLongClickListener(onLongClickListener);
-		button4.setOnLongClickListener(onLongClickListener);
-		button5.setOnLongClickListener(onLongClickListener);
-		button6.setOnLongClickListener(onLongClickListener);
-		button7.setOnLongClickListener(onLongClickListener);
-		button8.setOnLongClickListener(onLongClickListener);
-		button9.setOnLongClickListener(onLongClickListener);
+		for(int i = 0; i < BUTTONS_NUMBER; i++)
+			buttons[i].setOnLongClickListener(onLongClickListener);
 	}
 
 	private void initOnClickListeners() {
 		// TODO Auto-generated method stub
-		button1.setOnClickListener(onClickListener);
-		button2.setOnClickListener(onClickListener);
-		button3.setOnClickListener(onClickListener);
-		button4.setOnClickListener(onClickListener);
-		button5.setOnClickListener(onClickListener);
-		button6.setOnClickListener(onClickListener);
-		button7.setOnClickListener(onClickListener);
-		button8.setOnClickListener(onClickListener);
-		button9.setOnClickListener(onClickListener);
+		for(int i = 0; i < BUTTONS_NUMBER; i++)
+			buttons[i].setOnClickListener(onClickListener);
 	}
 
 	private void createButtons() {
 		// TODO Auto-generated method stub
-		button1 = (Button) findViewById(R.id.button1);
-		button2 = (Button) findViewById(R.id.button2);
-		button3 = (Button) findViewById(R.id.button3);
-		button4 = (Button) findViewById(R.id.button4);
-		button5 = (Button) findViewById(R.id.button5);
-		button6 = (Button) findViewById(R.id.button6);
-		button7 = (Button) findViewById(R.id.button7);
-		button8 = (Button) findViewById(R.id.button8);
-		button9 = (Button) findViewById(R.id.button9);
+		for(int i = 0; i < BUTTONS_NUMBER; i++)
+			buttons[i] = (Button) findViewById(buttonsRid[i]);
 	}
 
 	private void createSharedPrefName() {
 		// TODO Auto-generated method stub
-		sharedPrefNameButon1 = context.getSharedPreferences(
-				getString(R.string.buttonName1), Context.MODE_PRIVATE);
-		sharedPrefNameButon2 = context.getSharedPreferences(
-				getString(R.string.buttonName2), Context.MODE_PRIVATE);
-		sharedPrefNameButon3 = context.getSharedPreferences(
-				getString(R.string.buttonName3), Context.MODE_PRIVATE);
-		sharedPrefNameButon4 = context.getSharedPreferences(
-				getString(R.string.buttonName4), Context.MODE_PRIVATE);
-		sharedPrefNameButon5 = context.getSharedPreferences(
-				getString(R.string.buttonName5), Context.MODE_PRIVATE);
-		sharedPrefNameButon6 = context.getSharedPreferences(
-				getString(R.string.buttonName6), Context.MODE_PRIVATE);
-		sharedPrefNameButon7 = context.getSharedPreferences(
-				getString(R.string.buttonName7), Context.MODE_PRIVATE);
-		sharedPrefNameButon8 = context.getSharedPreferences(
-				getString(R.string.buttonName8), Context.MODE_PRIVATE);
-		sharedPrefNameButon9 = context.getSharedPreferences(
-				getString(R.string.buttonName9), Context.MODE_PRIVATE);
+		for(int i = 0; i < BUTTONS_NUMBER; i++)
+			sharedPrefNameButton[i] = context.getSharedPreferences(
+					getString(buttonStrNames[i]), Context.MODE_PRIVATE);
 	}
 
 	private void createSharedPrefString() {
 		// TODO Auto-generated method stub
-		sharedPrefStringButon1 = context.getSharedPreferences(
-				getString(R.string.textButton1), Context.MODE_PRIVATE);
-		sharedPrefStringButon2 = context.getSharedPreferences(
-				getString(R.string.textButton2), Context.MODE_PRIVATE);
-		sharedPrefStringButon3 = context.getSharedPreferences(
-				getString(R.string.textButton3), Context.MODE_PRIVATE);
-		sharedPrefStringButon4 = context.getSharedPreferences(
-				getString(R.string.textButton4), Context.MODE_PRIVATE);
-		sharedPrefStringButon5 = context.getSharedPreferences(
-				getString(R.string.textButton5), Context.MODE_PRIVATE);
-		sharedPrefStringButon6 = context.getSharedPreferences(
-				getString(R.string.textButton6), Context.MODE_PRIVATE);
-		sharedPrefStringButon7 = context.getSharedPreferences(
-				getString(R.string.textButton7), Context.MODE_PRIVATE);
-		sharedPrefStringButon8 = context.getSharedPreferences(
-				getString(R.string.textButton8), Context.MODE_PRIVATE);
-		sharedPrefStringButon9 = context.getSharedPreferences(
-				getString(R.string.textButton9), Context.MODE_PRIVATE);
+		for(int i = 0; i < BUTTONS_NUMBER; i++)
+			sharedPrefStringButton[i] = context.getSharedPreferences(
+					getString(buttonStrStrings[i]), Context.MODE_PRIVATE);
 	}
 
 	@Override
@@ -301,38 +197,15 @@ public class MainActivity extends Activity {
 	}
 
 	private String getButtonText(View v) {
-		switch (v.getId()) {
-		case R.id.button1:
-			return sharedPrefStringButon1.getString(
-					getString(R.string.textButton1), getResources().getString(R.string.textButton1));
-		case R.id.button2:
-			return sharedPrefStringButon2.getString(
-					getString(R.string.textButton2), getResources().getString(R.string.textButton2));
-		case R.id.button3:
-			return sharedPrefStringButon3.getString(
-					getString(R.string.textButton3), getResources().getString(R.string.textButton3));
-		case R.id.button4:
-			return sharedPrefStringButon4.getString(
-					getString(R.string.textButton4), getResources().getString(R.string.textButton4));
-		case R.id.button5:
-			return sharedPrefStringButon5.getString(
-					getString(R.string.textButton5), getResources().getString(R.string.textButton5));
-		case R.id.button6:
-			return sharedPrefStringButon6.getString(
-					getString(R.string.textButton6), getResources().getString(R.string.textButton6));
-		case R.id.button7:
-			return sharedPrefStringButon7.getString(
-					getString(R.string.textButton7), getResources().getString(R.string.textButton7));
-		case R.id.button8:
-			return sharedPrefStringButon8.getString(
-					getString(R.string.textButton8), getResources().getString(R.string.textButton8));
-		case R.id.button9:
-			return sharedPrefStringButon9.getString(
-					getString(R.string.textButton9), getResources().getString(R.string.textButton9));
-		default:
-			return "";
+		String result = "";
+		for(int i = 0; i < BUTTONS_NUMBER; i++) {
+			if(buttonsRid[i] == v.getId()) {
+				result = sharedPrefStringButton[i].getString(
+						getString(buttonStrStrings[i]), getResources().getString(buttonStrStrings[i]));
+				break;
+			}
 		}
-
+		return result;
 	}
 	
 	private void initIPandPort() {

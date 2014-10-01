@@ -158,42 +158,40 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_action_accept=0x7f020000;
-        public static final int ic_action_network_wifi=0x7f020001;
-        public static final int ic_action_save=0x7f020002;
-        public static final int ic_action_settings=0x7f020003;
-        public static final int ic_action_undo=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int notification_item_background_color=0x7f02000a;
-        public static final int notification_item_background_color_pressed=0x7f02000b;
-        public static final int notification_template_icon_bg=0x7f020013;
-        public static final int notification_template_icon_low_bg=0x7f020014;
-        public static final int safe_mode_background=0x7f02000d;
-        public static final int screen_background_dark=0x7f020007;
+        public static final int ic_action_settings=0x7f020001;
+        public static final int ic_action_undo=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int notification_item_background_color=0x7f020008;
+        public static final int notification_item_background_color_pressed=0x7f020009;
+        public static final int notification_template_icon_bg=0x7f020011;
+        public static final int notification_template_icon_low_bg=0x7f020012;
+        public static final int safe_mode_background=0x7f02000b;
+        public static final int screen_background_dark=0x7f020005;
         /** 
     Background drawable that can be used for a transparent activity to
     be able to display a dark UI: this darkens its background to make
     a dark (default theme) UI more visible.
     
          */
-        public static final int screen_background_dark_transparent=0x7f02000e;
-        public static final int screen_background_holo_dark=0x7f020012;
+        public static final int screen_background_dark_transparent=0x7f02000c;
+        public static final int screen_background_holo_dark=0x7f020010;
         /**  For holo theme 
          */
-        public static final int screen_background_holo_light=0x7f020011;
-        public static final int screen_background_light=0x7f020006;
+        public static final int screen_background_holo_light=0x7f02000f;
+        public static final int screen_background_light=0x7f020004;
         /** 
     Background drawable that can be used for a transparent activity to
     be able to display a light UI: this lightens its background to make
     a light UI more visible.
     
          */
-        public static final int screen_background_light_transparent=0x7f02000f;
-        public static final int search_bar_default_color=0x7f02000c;
+        public static final int screen_background_light_transparent=0x7f02000d;
+        public static final int search_bar_default_color=0x7f02000a;
         /**  For date picker widget 
          */
-        public static final int selected_day_background=0x7f020010;
-        public static final int status_bar_closed_default_background=0x7f020008;
-        public static final int status_bar_opened_default_background=0x7f020009;
+        public static final int selected_day_background=0x7f02000e;
+        public static final int status_bar_closed_default_background=0x7f020006;
+        public static final int status_bar_opened_default_background=0x7f020007;
     }
     public static final class id {
         public static final int action_accept=0x7f090014;
