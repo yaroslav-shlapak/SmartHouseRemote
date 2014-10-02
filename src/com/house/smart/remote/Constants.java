@@ -73,6 +73,12 @@ public final class Constants
         }
     }
 
+	public final static String BUTTON_NAME = "com.house.smart.remote.BUTTON.NAME";
+
+	public final static String BUTTON_STRING = "com.house.smart.remote.BUTTON.STRIMG";
+
+	public final static int BUTTONS_NUMBER = 15;
+
     /**
      * Private constructor prevents instantiation.
      *
@@ -82,4 +88,9 @@ public final class Constants
     {
         throw new UnsupportedOperationException("This class is non-instantiable"); //$NON-NLS-1$
     }
+    
+    public static final String WIFI_DISCONNECTED_MESSAGE = "WI-FI is not connected";
+    public static final String INVALID_IP_ERROR_MESSAGE = "Error: Invalid IP Address";
+    public static final String INVALID_PORT_ERROR_MESSAGE = "Error: Invalid Port Number";
+    public static final String SENDING_CONTENT_ERROR_MESSAGE = "Error: Text/Hex required to send";
 }

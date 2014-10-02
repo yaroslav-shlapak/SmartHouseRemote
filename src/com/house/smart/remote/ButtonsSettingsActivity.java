@@ -23,8 +23,8 @@ public class ButtonsSettingsActivity extends Activity {
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			buttonNameInt = extras.getInt(MainActivity.BUTTON_NAME);
-			buttonStringInt = extras.getInt(MainActivity.BUTTON_STRING);
+			buttonNameInt = extras.getInt(Constants.BUTTON_NAME);
+			buttonStringInt = extras.getInt(Constants.BUTTON_STRING);
 		}
 		buttonName = (EditText) findViewById(R.id.buttonName);
 		buttonString = (EditText) findViewById(R.id.buttonString);
