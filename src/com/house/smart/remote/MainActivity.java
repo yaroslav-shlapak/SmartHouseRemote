@@ -1,5 +1,13 @@
 package com.house.smart.remote;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +17,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,6 +102,9 @@ public class MainActivity extends Activity {
 		createSharedPrefString();
 
 		initButtonsNames();
+		
+        runTcpClient();
+        finish();
 	}
 
 	public void onResume() {
@@ -267,5 +279,30 @@ public class MainActivity extends Activity {
 		buttonsSize.height = (metrics.heightPixels - 150) / 5;
 		buttonsSize.width = (metrics.widthPixels - 50) / 3;
 	}
+
+	
+    private static final int TCP_SERVER_PORT = 21111;
+	private void runTcpClient() {
+    	try {
+			Socket s = new Socket("localhost", TCP_SERVER_PORT);
+			BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+			//send output msg
+			String outMsg = "TCP connecting to " + TCP_SERVER_PORT + System.getProperty("line.separator"); 
+			out.write(outMsg);
+			out.flush();
+			Log.i("TcpClient", "sent: " + outMsg);
+			//accept server response
+			String inMsg = in.readLine() + System.getProperty("line.separator");
+			Log.i("TcpClient", "received: " + inMsg);
+			//close connection
+			s.close();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+    }
+	//replace runTcpClient() at onCreate with this method if you want to run tcp client as a service
 
 }
