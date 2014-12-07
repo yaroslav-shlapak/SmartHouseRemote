@@ -194,27 +194,13 @@ public final class R {
         public static final int status_bar_opened_default_background=0x7f020007;
     }
     public static final class id {
-        public static final int action_accept=0x7f09001a;
-        public static final int action_undo=0x7f090019;
-        public static final int button1=0x7f090011;
-        public static final int button10=0x7f090015;
-        public static final int button11=0x7f090016;
-        public static final int button12=0x7f090017;
-        public static final int button13=0x7f090014;
-        public static final int button14=0x7f090013;
-        public static final int button15=0x7f090012;
-        public static final int button2=0x7f09000b;
-        public static final int button3=0x7f09000e;
-        public static final int button4=0x7f09000c;
-        public static final int button5=0x7f090009;
-        public static final int button6=0x7f09000a;
-        public static final int button7=0x7f09000f;
-        public static final int button8=0x7f09000d;
-        public static final int button9=0x7f090010;
+        public static final int action_accept=0x7f09000c;
+        public static final int action_undo=0x7f09000b;
         public static final int buttonName=0x7f090003;
         public static final int buttonString=0x7f090004;
+        public static final int grdButtons=0x7f090009;
         public static final int ip_address=0x7f090007;
-        public static final int ip_settings=0x7f090018;
+        public static final int ip_settings=0x7f09000a;
         public static final int port_address=0x7f090008;
         public static final int relativeLayout1=0x7f090000;
         public static final int textViewButtonName=0x7f090001;

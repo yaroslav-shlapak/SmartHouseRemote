@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.calc.ever.main.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -38,12 +41,15 @@ public class MainActivity extends Activity {
 	private SharedPreferences[] sharedPrefNameButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
 	private SharedPreferences[] sharedPrefStringButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
 	private Button[] buttons = new Button[Constants.BUTTONS_NUMBER];
+	
+	private SmartHouseButtonsAdapter buttonsAdapter;
+	private GridView keypadGrid;
 
-	private final static int[] buttonsRid = { R.id.button1, R.id.button2,
-			R.id.button3, R.id.button4, R.id.button5, R.id.button6,
-			R.id.button7, R.id.button8, R.id.button9, R.id.button10,
-			R.id.button11, R.id.button12, R.id.button13, R.id.button14,
-			R.id.button15};
+//	private final static int[] buttonsRid = { R.id.button1, R.id.button2,
+//			R.id.button3, R.id.button4, R.id.button5, R.id.button6,
+//			R.id.button7, R.id.button8, R.id.button9, R.id.button10,
+//			R.id.button11, R.id.button12, R.id.button13, R.id.button14,
+//			R.id.button15};
 
 	private final static int[] buttonStrNames = { R.string.buttonName1,
 			R.string.buttonName2, R.string.buttonName3, R.string.buttonName4,
@@ -58,7 +64,7 @@ public class MainActivity extends Activity {
 			R.string.textButton11, R.string.textButton12, R.string.textButton13,
 			R.string.textButton14, R.string.textButton15};
 
-	private OnClickListener onClickListener = new OnClickListener() {
+	private OnClickListener buttonOnClickListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
@@ -66,7 +72,7 @@ public class MainActivity extends Activity {
 		}
 	};
 
-	private OnLongClickListener onLongClickListener = new OnLongClickListener() {
+	private OnLongClickListener buttonOnLongClickListener = new OnLongClickListener() {
 
 		@Override
 		public boolean onLongClick(View v) {
@@ -94,8 +100,6 @@ public class MainActivity extends Activity {
 
 		createButtons();
 		initButtonsSize();
-		initOnClickListeners();
-		initOnLongClickListeners();
 
 		initIPandPort();
 		createSharedPrefName();
@@ -131,22 +135,15 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	private void initOnLongClickListeners() {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++)
-			buttons[i].setOnLongClickListener(onLongClickListener);
-	}
-
-	private void initOnClickListeners() {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++)
-			buttons[i].setOnClickListener(onClickListener);
-	}
-
 	private void createButtons() {
 		// TODO Auto-generated method stub
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++)
-			buttons[i] = (Button) findViewById(buttonsRid[i]);
+		buttonsAdapter = new SmartHouseButtonsAdapter(this);
+		keypadGrid = (GridView) findViewById(R.id.grdButtons);
+		
+		keypadGrid.setAdapter(buttonsAdapter);
+		
+		buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
+		buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
 	}
 
 	private void createSharedPrefName() {

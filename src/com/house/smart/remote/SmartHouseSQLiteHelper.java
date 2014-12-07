@@ -11,6 +11,7 @@ public class SmartHouseSQLiteHelper extends SQLiteOpenHelper {
   public static final String COLUMN_ID = "_id";
   public static final String COLUMN_BUTTON_NAME = "button_name";
   public static final String COLUMN_BUTTON_STRING = "button_string";
+  public static final String COLUMN_BUTTON_IMAGE = "button_string";
 
   private static final String DATABASE_NAME = "smarthouse.db";
   private static final int DATABASE_VERSION = 1;
@@ -18,7 +19,7 @@ public class SmartHouseSQLiteHelper extends SQLiteOpenHelper {
   // Database creation sql statement
   private static final String DATABASE_CREATE = "create table "
       + TABLE_NAME + "(" + COLUMN_ID
-      + " integer primary key autoincrement, " + COLUMN_BUTTON_NAME + " text not null," + COLUMN_BUTTON_STRING
+      + " integer primary key autoincrement, " + COLUMN_BUTTON_NAME + " text not null," + COLUMN_BUTTON_STRING + " text not null," + COLUMN_BUTTON_IMAGE
       + " text not null);";
 
   public SmartHouseSQLiteHelper(Context context) {
