@@ -3,9 +3,7 @@ package com.house.smart.remote;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
@@ -13,17 +11,17 @@ import android.widget.Button;
 public class SmartHouseButtonsAdapter extends BaseAdapter {
 	private Context mContext;
 
-    public void setButtonOnClickListener(AdapterView.OnItemClickListener buttonOnClickListener) {
+    public void setButtonOnClickListener(OnClickListener buttonOnClickListener) {
         this.buttonOnClickListener = buttonOnClickListener;
     }
 
-    public void setButtonOnLongClickListener(AdapterView.OnItemLongClickListener buttonOnLongClickListener) {
+    public void setButtonOnLongClickListener(View.OnLongClickListener buttonOnLongClickListener) {
         this.buttonOnLongClickListener = buttonOnLongClickListener;
     }
 
     // Declare button click listener variable
-	private AdapterView.OnItemClickListener buttonOnClickListener;
-	private AdapterView.OnItemLongClickListener buttonOnLongClickListener;
+	private OnClickListener buttonOnClickListener;
+	private View.OnLongClickListener buttonOnLongClickListener;
 
 	public SmartHouseButtonsAdapter(Context c) {
 		mContext = c;
@@ -33,7 +31,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 		return mButtons.length;
 	}
 
-	public Object getItem(int position) {
+	public SmartHouseButtons getItem(int position) {
 		return mButtons[position];
 	}
 

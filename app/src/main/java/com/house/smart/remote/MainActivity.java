@@ -35,10 +35,6 @@ public class MainActivity extends Activity {
 	private String textIp, textPort, defaultIp, defaultPort;
 	private Toast currentToast;
 	private Dimensions buttonsSize = new Dimensions();
-
-	private SharedPreferences[] sharedPrefNameButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
-	private SharedPreferences[] sharedPrefStringButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
-	private Button[] buttons = new Button[Constants.BUTTONS_NUMBER];
 	
 	private SmartHouseButtonsAdapter buttonsAdapter;
 	private GridView keypadGrid;
@@ -64,20 +60,23 @@ public class MainActivity extends Activity {
 			R.string.textButton11, R.string.textButton12, R.string.textButton13,
 			R.string.textButton14, R.string.textButton15};
 
-	private AdapterView.OnItemClickListener buttonOnClickListener = new AdapterView.OnItemClickListener() {
+	private View.OnClickListener buttonOnClickListener = new View.OnClickListener() {
 
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            sendData(view, i);
+        public void onClick(View view) {
+            sendData(view);
         }
     };
 
-	private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
+	private View.OnLongClickListener onItemLongClickListener = new View.OnLongClickListener() {
 
         @Override
-        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+        public boolean onLongClick(View view) {
+
             Intent intent = new Intent(getApplicationContext(),
                     ButtonsSettingsActivity.class);
+
+            final int position = keypadGrid.getPositionForView((View) view.getParent());
 
             intent.putExtra(Constants.BUTTON_POSITION, position);
             startActivity(intent);
@@ -186,7 +185,7 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
-	private void sendData(View view, int position) {
+	private void sendData(View view) {
 		context = getApplicationContext();
 		
 		if(!isWifiConnected()) {
@@ -210,7 +209,9 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-		String dataText = dataBaseButtons.getButtonValue().getButtonString();
+        final int position = keypadGrid.getPositionForView((View) view.getParent());
+
+		String dataText = dataBaseButtons.getButtonValue(buttonsAdapter.getItem(position).getId()).getButtonString();
 		String dataHex = "";
 		if (dataText.length() < 1 && dataHex.length() < 2) {
 			showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
