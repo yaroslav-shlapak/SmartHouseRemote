@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 	private SharedPreferences[] sharedPrefNameButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
 	private SharedPreferences[] sharedPrefStringButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
 	private Button[] buttons = new Button[Constants.BUTTONS_NUMBER];
-	
+
 	private SmartHouseButtonsAdapter buttonsAdapter;
 	private GridView keypadGrid;
 
@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
 		createSharedPrefString();
 
 		initButtonsNames();
-		
+
         runTcpClient();
         finish();
 	}
@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
 					getString(buttonStrNames[i]),
 					getResources().getString(buttonStrNames[i])));
 	}
-	
+
 	private void initButtonsSize() {
 		// TODO Auto-generated method stub
 		getButtonSize();
@@ -139,9 +139,9 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		buttonsAdapter = new SmartHouseButtonsAdapter(this);
 		keypadGrid = (GridView) findViewById(R.id.grdButtons);
-		
+
 		keypadGrid.setAdapter(buttonsAdapter);
-		
+
 		buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
 		buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
 	}
@@ -186,7 +186,7 @@ public class MainActivity extends Activity {
 
 	private void sendData(View view) {
 		context = getApplicationContext();
-		
+
 		if(!isWifiConnected()) {
 			showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
 			return;
@@ -252,14 +252,14 @@ public class MainActivity extends Activity {
 		defaultIp = getResources().getString(R.string.defaultIP);
 		defaultPort = getResources().getString(R.string.defaultPort);
 	}
-	
+
 	private boolean isWifiConnected() {
 		ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
 		return mWifi.isConnected();
 	}
-	
+
 	void showShortToast(String text)
 	{
 	    if(currentToast != null)
@@ -270,14 +270,14 @@ public class MainActivity extends Activity {
 	    currentToast.show();
 
 	}
-	
+
 	private void getButtonSize() {
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		buttonsSize.height = (metrics.heightPixels - 150) / 5;
 		buttonsSize.width = (metrics.widthPixels - 50) / 3;
 	}
 
-	
+
     private static final int TCP_SERVER_PORT = 21111;
 	private void runTcpClient() {
     	try {
@@ -285,7 +285,7 @@ public class MainActivity extends Activity {
 			BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
 			//send output msg
-			String outMsg = "TCP connecting to " + TCP_SERVER_PORT + System.getProperty("line.separator"); 
+			String outMsg = "TCP connecting to " + TCP_SERVER_PORT + System.getProperty("line.separator");
 			out.write(outMsg);
 			out.flush();
 			Log.i("TcpClient", "sent: " + outMsg);
@@ -298,7 +298,7 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
     }
 	//replace runTcpClient() at onCreate with this method if you want to run tcp client as a service
 
