@@ -23,10 +23,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -35,11 +37,13 @@ public class MainActivity extends Activity {
 	private String textIp, textPort, defaultIp, defaultPort;
 	private Toast currentToast;
 	private Dimensions buttonsSize = new Dimensions();
+
+	private SharedPreferences[] sharedPrefNameButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
+	private SharedPreferences[] sharedPrefStringButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
+	private Button[] buttons = new Button[Constants.BUTTONS_NUMBER];
 	
 	private SmartHouseButtonsAdapter buttonsAdapter;
 	private GridView keypadGrid;
-    ButtonsSQLiteHelper dataBaseButtons;
-    UDPSQLiteHelper dataBaseUdp;
 
 //	private final static int[] buttonsRid = { R.id.button1, R.id.button2,
 //			R.id.button3, R.id.button4, R.id.button5, R.id.button6,
@@ -60,36 +64,40 @@ public class MainActivity extends Activity {
 			R.string.textButton11, R.string.textButton12, R.string.textButton13,
 			R.string.textButton14, R.string.textButton15};
 
-	private View.OnClickListener buttonOnClickListener = new View.OnClickListener() {
+	private OnClickListener buttonOnClickListener = new OnClickListener() {
 
-        @Override
-        public void onClick(View view) {
-            sendData(view);
-        }
-    };
+		@Override
+		public void onClick(View v) {
+			sendData(v);
+		}
+	};
 
-	private View.OnLongClickListener onItemLongClickListener = new View.OnLongClickListener() {
+	private OnLongClickListener buttonOnLongClickListener = new OnLongClickListener() {
 
-        @Override
-        public boolean onLongClick(View view) {
+		@Override
+		public boolean onLongClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent(getApplicationContext(),
+					ButtonsSettingsActivity.class);
 
-            Intent intent = new Intent(getApplicationContext(),
-                    ButtonsSettingsActivity.class);
+			for (int i = 0; i < Constants.BUTTONS_NUMBER; i++) {
+				if (buttonsRid[i] == v.getId()) {
+					intent.putExtra(Constants.BUTTON_NAME, buttonStrNames[i]);
+					intent.putExtra(Constants.BUTTON_STRING, buttonStrStrings[i]);
+					startActivity(intent);
+					break;
+				}
+			}
+			return true;
+		}
 
-            final int position = keypadGrid.getPositionForView((View) view.getParent());
-
-            intent.putExtra(Constants.BUTTON_POSITION, position);
-            startActivity(intent);
-            return true;
-        }
-    };
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-        initDatabase();
 		createButtons();
 		initButtonsSize();
 
@@ -103,16 +111,7 @@ public class MainActivity extends Activity {
         finish();
 	}
 
-    private void initDatabase() {
-        dataBaseButtons = new ButtonsSQLiteHelper(this);
-        dataBaseUdp = new UDPSQLiteHelper(this);
-
-        for(SmartHouseButtons p : SmartHouseButtons.values())
-            dataBaseButtons.addButtonValue(new ButtonValue(p));
-        dataBaseUdp.addUdpValue(new UdpValue(Constants.DEFAULT_IP, Constants.DEFAULT_PORT));
-    }
-
-    public void onResume() {
+	public void onResume() {
 		super.onResume();
 		initButtonsNames();
 	}
@@ -144,7 +143,7 @@ public class MainActivity extends Activity {
 		keypadGrid.setAdapter(buttonsAdapter);
 		
 		buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
-		buttonsAdapter.setButtonOnLongClickListener(onItemLongClickListener);
+		buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
 	}
 
 	private void createSharedPrefName() {
@@ -193,9 +192,10 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-		UdpValue udpValue = dataBaseUdp.getUdpValue(0);
-        textIp = udpValue.getIp();
-		textPort = udpValue.getPort();
+		textIp = sharedPrefIp.getString(getString(R.string.preference_ip),
+				defaultIp);
+		textPort = sharedPrefPort.getString(
+				getString(R.string.preference_port), defaultPort);
 
 		String host = textIp;
 		if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
@@ -209,9 +209,7 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-        final int position = keypadGrid.getPositionForView((View) view.getParent());
-
-		String dataText = dataBaseButtons.getButtonValue(buttonsAdapter.getItem(position).getId()).getButtonString();
+		String dataText = getButtonText(view);
 		String dataHex = "";
 		if (dataText.length() < 1 && dataHex.length() < 2) {
 			showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
@@ -231,6 +229,18 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	private String getButtonText(View v) {
+		String result = "";
+		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++) {
+			if (buttonsRid[i] == v.getId()) {
+				result = sharedPrefStringButton[i].getString(
+						getString(buttonStrStrings[i]), getResources()
+								.getString(buttonStrStrings[i]));
+				break;
+			}
+		}
+		return result;
+	}
 
 	private void initIPandPort() {
 		context = getApplicationContext();

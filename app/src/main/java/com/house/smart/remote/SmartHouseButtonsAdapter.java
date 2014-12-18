@@ -3,6 +3,7 @@ package com.house.smart.remote;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -11,17 +12,19 @@ import android.widget.Button;
 public class SmartHouseButtonsAdapter extends BaseAdapter {
 	private Context mContext;
 
-    public void setButtonOnClickListener(OnClickListener buttonOnClickListener) {
-        this.buttonOnClickListener = buttonOnClickListener;
-    }
-
-    public void setButtonOnLongClickListener(View.OnLongClickListener buttonOnLongClickListener) {
-        this.buttonOnLongClickListener = buttonOnLongClickListener;
-    }
-
-    // Declare button click listener variable
+	// Declare button click listener variable
 	private OnClickListener buttonOnClickListener;
-	private View.OnLongClickListener buttonOnLongClickListener;
+	private OnLongClickListener buttonOnLongClickListener;
+	
+	
+	public void setButtonOnClickListener(OnClickListener buttonOnClickListener) {
+		this.buttonOnClickListener = buttonOnClickListener;
+	}
+
+	public void setButtonOnLongClickListener(
+			OnLongClickListener buttonOnLongClickListener) {
+		this.buttonOnLongClickListener = buttonOnLongClickListener;
+	}
 
 	public SmartHouseButtonsAdapter(Context c) {
 		mContext = c;
@@ -31,7 +34,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 		return mButtons.length;
 	}
 
-	public SmartHouseButtons getItem(int position) {
+	public Object getItem(int position) {
 		return mButtons[position];
 	}
 
@@ -39,6 +42,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 		return 0;
 	}
 
+	// create a new ButtonView for each item referenced by the Adapter
 	// create a new ButtonView for each item referenced by the Adapter
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Button btn;
@@ -50,6 +54,10 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 
 			btn.setOnClickListener(buttonOnClickListener);
 			btn.setOnLongClickListener(buttonOnLongClickListener);
+
+			// Set CalculatorButton enumeration as tag of the button so that we
+			// will use this information from our main view to identify what to
+			// do
 			btn.setTag(keypadButton);
 		} else {
 			btn = (Button) convertView;

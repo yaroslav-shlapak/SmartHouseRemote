@@ -79,11 +79,6 @@ public final class Constants
 
 	public final static int BUTTONS_NUMBER = 15;
 
-    public final static String BUTTON_POSITION = "com.house.smart.remote.button.position";
-
-    public final static String DEFAULT_IP = "192.168.0.103";
-    public final static String DEFAULT_PORT = "1153";
-
     /**
      * Private constructor prevents instantiation.
      *
