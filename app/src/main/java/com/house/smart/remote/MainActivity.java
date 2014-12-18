@@ -1,15 +1,5 @@
 package com.house.smart.remote;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
-import com.calc.ever.main.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,51 +8,39 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.house.smart.remote.database.ButtonValue;
+import com.house.smart.remote.database.ButtonValueDataSource;
+import com.house.smart.remote.database.UdpValue;
+import com.house.smart.remote.database.UdpValueDataSource;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class MainActivity extends Activity {
 	private Context context;
 	private SharedPreferences sharedPrefIp, sharedPrefPort;
 	private String textIp, textPort, defaultIp, defaultPort;
 	private Toast currentToast;
-	private Dimensions buttonsSize = new Dimensions();
-
-	private SharedPreferences[] sharedPrefNameButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
-	private SharedPreferences[] sharedPrefStringButton = new SharedPreferences[Constants.BUTTONS_NUMBER];
-	private Button[] buttons = new Button[Constants.BUTTONS_NUMBER];
-
 	private SmartHouseButtonsAdapter buttonsAdapter;
 	private GridView keypadGrid;
+    UdpValueDataSource udpValueDataSource;
+    ButtonValueDataSource buttonValueDataSource;
 
-//	private final static int[] buttonsRid = { R.id.button1, R.id.button2,
-//			R.id.button3, R.id.button4, R.id.button5, R.id.button6,
-//			R.id.button7, R.id.button8, R.id.button9, R.id.button10,
-//			R.id.button11, R.id.button12, R.id.button13, R.id.button14,
-//			R.id.button15};
 
-	private final static int[] buttonStrNames = { R.string.buttonName1,
-			R.string.buttonName2, R.string.buttonName3, R.string.buttonName4,
-			R.string.buttonName5, R.string.buttonName6, R.string.buttonName7,
-			R.string.buttonName8, R.string.buttonName9, R.string.buttonName10,
-			R.string.buttonName11, R.string.buttonName12, R.string.buttonName13,
-			R.string.buttonName14, R.string.buttonName15};
-	private final static int[] buttonStrStrings = { R.string.textButton1,
-			R.string.textButton2, R.string.textButton3, R.string.textButton4,
-			R.string.textButton5, R.string.textButton6, R.string.textButton7,
-			R.string.textButton8, R.string.textButton9, R.string.textButton10,
-			R.string.textButton11, R.string.textButton12, R.string.textButton13,
-			R.string.textButton14, R.string.textButton15};
 
 	private OnClickListener buttonOnClickListener = new OnClickListener() {
 
@@ -77,18 +55,12 @@ public class MainActivity extends Activity {
 		@Override
 		public boolean onLongClick(View v) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(getApplicationContext(),
-					ButtonsSettingsActivity.class);
+			Intent intent = new Intent(getApplicationContext(), ButtonsSettingsActivity.class);
+            int position = 0;
+            intent.putExtra(Constants.BUTTON_STRING, position);
+            startActivity(intent);
 
-			for (int i = 0; i < Constants.BUTTONS_NUMBER; i++) {
-				if (buttonsRid[i] == v.getId()) {
-					intent.putExtra(Constants.BUTTON_NAME, buttonStrNames[i]);
-					intent.putExtra(Constants.BUTTON_STRING, buttonStrStrings[i]);
-					startActivity(intent);
-					break;
-				}
-			}
-			return true;
+            return false;
 		}
 
 	};
@@ -98,42 +70,44 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+
+        initDatabase();
 		createButtons();
-		initButtonsSize();
 
-		initIPandPort();
-		createSharedPrefName();
-		createSharedPrefString();
 
-		initButtonsNames();
-
-        runTcpClient();
-        finish();
+        /*runTcpClient();
+        finish();*/
 	}
 
-	public void onResume() {
+
+
+    public void onResume() {
 		super.onResume();
-		initButtonsNames();
 	}
 
-	private void initButtonsNames() {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++)
-			buttons[i].setText(sharedPrefNameButton[i].getString(
-					getString(buttonStrNames[i]),
-					getResources().getString(buttonStrNames[i])));
-	}
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-	private void initButtonsSize() {
-		// TODO Auto-generated method stub
-		getButtonSize();
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++) {
-			ViewGroup.LayoutParams params = buttons[i].getLayoutParams();
-			params.width = buttonsSize.width;
-			params.height = buttonsSize.height;
-			buttons[i].setLayoutParams(params);
-		}
-	}
+        udpValueDataSource.close();
+        buttonValueDataSource.close();
+    }
+
+
+    private void initDatabase() {
+        udpValueDataSource = new UdpValueDataSource(this);
+        buttonValueDataSource = new ButtonValueDataSource(this);
+
+        udpValueDataSource.open();
+        buttonValueDataSource.open();
+
+        for(SmartHouseButtons btn : SmartHouseButtons.values())
+            buttonValueDataSource.addButtonValue(new ButtonValue(btn));
+
+        udpValueDataSource.addUdpValue(new UdpValue(Constants.DEFAULT_IP, Constants.DEFAULT_PORT));
+
+    }
+
 
 	private void createButtons() {
 		// TODO Auto-generated method stub
@@ -146,19 +120,6 @@ public class MainActivity extends Activity {
 		buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
 	}
 
-	private void createSharedPrefName() {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++)
-			sharedPrefNameButton[i] = context.getSharedPreferences(
-					getString(buttonStrNames[i]), Context.MODE_PRIVATE);
-	}
-
-	private void createSharedPrefString() {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++)
-			sharedPrefStringButton[i] = context.getSharedPreferences(
-					getString(buttonStrStrings[i]), Context.MODE_PRIVATE);
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -192,10 +153,8 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-		textIp = sharedPrefIp.getString(getString(R.string.preference_ip),
-				defaultIp);
-		textPort = sharedPrefPort.getString(
-				getString(R.string.preference_port), defaultPort);
+		textIp = "";
+		textPort = "";
 
 		String host = textIp;
 		if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
@@ -209,7 +168,7 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-		String dataText = getButtonText(view);
+		String dataText = "";
 		String dataHex = "";
 		if (dataText.length() < 1 && dataHex.length() < 2) {
 			showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
@@ -229,29 +188,7 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
-	private String getButtonText(View v) {
-		String result = "";
-		for (int i = 0; i < Constants.BUTTONS_NUMBER; i++) {
-			if (buttonsRid[i] == v.getId()) {
-				result = sharedPrefStringButton[i].getString(
-						getString(buttonStrStrings[i]), getResources()
-								.getString(buttonStrStrings[i]));
-				break;
-			}
-		}
-		return result;
-	}
 
-	private void initIPandPort() {
-		context = getApplicationContext();
-		sharedPrefIp = context.getSharedPreferences(
-				getString(R.string.preference_ip), Context.MODE_PRIVATE);
-		sharedPrefPort = context.getSharedPreferences(
-				getString(R.string.preference_port), Context.MODE_PRIVATE);
-
-		defaultIp = getResources().getString(R.string.defaultIP);
-		defaultPort = getResources().getString(R.string.defaultPort);
-	}
 
 	private boolean isWifiConnected() {
 		ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -269,12 +206,6 @@ public class MainActivity extends Activity {
 	    currentToast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
 	    currentToast.show();
 
-	}
-
-	private void getButtonSize() {
-		DisplayMetrics metrics = getResources().getDisplayMetrics();
-		buttonsSize.height = (metrics.heightPixels - 150) / 5;
-		buttonsSize.width = (metrics.widthPixels - 50) / 3;
 	}
 
 

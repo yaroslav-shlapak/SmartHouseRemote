@@ -49,8 +49,8 @@ public class ButtonValue {
     }
 
     public ButtonValue(SmartHouseButtons smartHouseButtons) {
-        this.buttonName = smartHouseButtons.getButtonName().toString();
-        this.buttonString = smartHouseButtons.getButtonString().toString();
+        this.buttonName = smartHouseButtons.getName();
+        this.buttonString = smartHouseButtons.getString();
         this.id = smartHouseButtons.getId();
     }
 }

@@ -72,7 +72,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 			btn = (Button) convertView;
 		}
 
-		btn.setText(mButtons[position].getText());
+		btn.setText(mButtons[position].getName());
 		return btn;
 	}
 
