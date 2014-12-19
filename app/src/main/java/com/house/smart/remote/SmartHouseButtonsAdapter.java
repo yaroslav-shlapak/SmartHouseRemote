@@ -2,6 +2,7 @@ package com.house.smart.remote;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -20,16 +21,20 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 	
 	
 	public void setButtonOnClickListener(OnClickListener buttonOnClickListener) {
+
 		this.buttonOnClickListener = buttonOnClickListener;
+        Log.v("SmartHouseButtonsAdapter", "OnClickListener was initialized");
 	}
 
 	public void setButtonOnLongClickListener(
 			OnLongClickListener buttonOnLongClickListener) {
 		this.buttonOnLongClickListener = buttonOnLongClickListener;
+        Log.v("SmartHouseButtonsAdapter", "OnLongClickListener was initialized");
 	}
 
 	public SmartHouseButtonsAdapter(Context c) {
-		mContext = c;
+        mContext = c;
+        Log.v("SmartHouseButtonsAdapter", "SmartHouseButtonsAdapter was created");
 	}
 
 	public int getCount() {
@@ -51,23 +56,33 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 		if (convertView == null) { // if it's not recycled, initialize some
 									// attributes
 
+
 			btn = new Button(mContext);
 
             getButtonSize();
-            ViewGroup.LayoutParams params = btn.getLayoutParams();
-            params.width = buttonsSize.width;
-            params.height = buttonsSize.height;
-            btn.setLayoutParams(params);
+//            Log.v("SmartHouseButtonsAdapter", "getView test 1");
+//            ViewGroup.LayoutParams params = btn.getLayoutParams();
+//            Log.v("SmartHouseButtonsAdapter", "getView test 2");
+//            params.width = buttonsSize.width;
+//            Log.v("SmartHouseButtonsAdapter", "getView test 3");
+//            params.height = buttonsSize.height;
+//            Log.v("SmartHouseButtonsAdapter", "getView test 4");
+//            btn.setLayoutParams(params);
+//            Log.v("SmartHouseButtonsAdapter", "getView test 5");
+            btn.setWidth(buttonsSize.width);
+            btn.setHeight(buttonsSize.height);
 
+            Log.v("SmartHouseButtonsAdapter", "getView position " + String.valueOf(position));
 			SmartHouseButtons keypadButton = mButtons[position];
-
 			btn.setOnClickListener(buttonOnClickListener);
 			btn.setOnLongClickListener(buttonOnLongClickListener);
 
 			// Set CalculatorButton enumeration as tag of the button so that we
 			// will use this information from our main view to identify what to
 			// do
+            Log.v("SmartHouseButtonsAdapter", "getView test 2");
 			btn.setTag(keypadButton);
+
 		} else {
 			btn = (Button) convertView;
 		}
@@ -84,7 +99,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 
     private void getButtonSize() {
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
-        buttonsSize.height = (metrics.heightPixels - 150) / 5;
-        buttonsSize.width = (metrics.widthPixels - 50) / 3;
+        buttonsSize.height = (metrics.heightPixels - 200) / 4;
+        buttonsSize.width = (metrics.widthPixels - 75) / 3;
     }
 }

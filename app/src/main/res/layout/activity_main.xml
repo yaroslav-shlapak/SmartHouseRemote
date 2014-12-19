@@ -13,11 +13,9 @@
         android:id="@+id/grdButtons"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:columnWidth="90dp"
         android:gravity="center"
-        android:horizontalSpacing="10dp"
-        android:numColumns="5"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" />
+        android:horizontalSpacing="0dp"
+        android:numColumns="3"
+        android:verticalSpacing="0dp" />
 
 </LinearLayout>
