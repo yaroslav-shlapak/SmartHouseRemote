@@ -1,6 +1,6 @@
 package com.house.smart.remote.database;
 
-import com.house.smart.remote.SmartHouseButtons;
+import com.house.smart.remote.ui.SmartHouseButtons;
 
 public class ButtonValue {
 

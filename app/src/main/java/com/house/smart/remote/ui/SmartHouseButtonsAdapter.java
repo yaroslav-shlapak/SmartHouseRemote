@@ -1,4 +1,4 @@
-package com.house.smart.remote;
+package com.house.smart.remote.ui;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -14,6 +14,7 @@ import android.widget.Button;
 public class SmartHouseButtonsAdapter extends BaseAdapter {
 	private Context mContext;
     private Dimensions buttonsSize = new Dimensions();
+    Button btn;
 
 	// Declare button click listener variable
 	private OnClickListener buttonOnClickListener;
@@ -52,23 +53,12 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 	// create a new ButtonView for each item referenced by the Adapter
 	// create a new ButtonView for each item referenced by the Adapter
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Button btn;
 		if (convertView == null) { // if it's not recycled, initialize some
 									// attributes
-
 
 			btn = new Button(mContext);
 
             getButtonSize();
-//            Log.v("SmartHouseButtonsAdapter", "getView test 1");
-//            ViewGroup.LayoutParams params = btn.getLayoutParams();
-//            Log.v("SmartHouseButtonsAdapter", "getView test 2");
-//            params.width = buttonsSize.width;
-//            Log.v("SmartHouseButtonsAdapter", "getView test 3");
-//            params.height = buttonsSize.height;
-//            Log.v("SmartHouseButtonsAdapter", "getView test 4");
-//            btn.setLayoutParams(params);
-//            Log.v("SmartHouseButtonsAdapter", "getView test 5");
             btn.setWidth(buttonsSize.width);
             btn.setHeight(buttonsSize.height);
 

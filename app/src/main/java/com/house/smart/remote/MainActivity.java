@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ import com.house.smart.remote.database.ButtonValue;
 import com.house.smart.remote.database.ButtonValueDataSource;
 import com.house.smart.remote.database.UdpValue;
 import com.house.smart.remote.database.UdpValueDataSource;
+import com.house.smart.remote.ui.SmartHouseButtons;
+import com.house.smart.remote.ui.SmartHouseButtonsAdapter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,59 +34,60 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class MainActivity extends Activity {
-	private Context context;
-	private SharedPreferences sharedPrefIp, sharedPrefPort;
-	private String textIp, textPort, defaultIp, defaultPort;
-	private Toast currentToast;
-	private SmartHouseButtonsAdapter buttonsAdapter;
-	private GridView keypadGrid;
+    private Context context;
+    private SharedPreferences sharedPrefIp, sharedPrefPort;
+    private String textIp, textPort, defaultIp, defaultPort;
+    private Toast currentToast;
+    private SmartHouseButtonsAdapter buttonsAdapter;
+    private GridView keypadGrid;
     UdpValueDataSource udpValueDataSource;
     ButtonValueDataSource buttonValueDataSource;
 
 
+    private OnClickListener buttonOnClickListener = new OnClickListener() {
 
-	private OnClickListener buttonOnClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            sendData(v);
+        }
+    };
 
-		@Override
-		public void onClick(View v) {
-			sendData(v);
-		}
-	};
+    private OnLongClickListener buttonOnLongClickListener = new OnLongClickListener() {
 
-	private OnLongClickListener buttonOnLongClickListener = new OnLongClickListener() {
-
-		@Override
-		public boolean onLongClick(View v) {
-			// TODO Auto-generated method stub
-			Intent intent = new Intent(getApplicationContext(), ButtonsSettingsActivity.class);
-            int position = 0;
-            intent.putExtra(Constants.BUTTON_STRING, position);
+        @Override
+        public boolean onLongClick(View v) {
+            // TODO Auto-generated method stub
+            Intent intent = new Intent(getApplicationContext(), ButtonsSettingsActivity.class);
+            SmartHouseButtons btn = (SmartHouseButtons) v.getTag();
+            Log.v("onLongClick", "btn was initialized");
+            intent.putExtra(Constants.BUTTON_ID, btn.getId());
+            Log.v("onLongClick", "putExtra");
             startActivity(intent);
-
             return false;
-		}
+        }
 
-	};
+    };
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
 
         initDatabase();
-		createButtons();
+        createButtons();
 
 
         /*runTcpClient();
         finish();*/
-	}
-
+    }
 
 
     public void onResume() {
-		super.onResume();
-	}
+        super.onResume();
+        buttonsAdapter.notifyDataSetChanged();
+//        findViewById(R.id.grdButtons).invalidate();
+    }
 
     @Override
     protected void onPause() {
@@ -101,7 +105,8 @@ public class MainActivity extends Activity {
         udpValueDataSource.open();
         buttonValueDataSource.open();
 
-        for(SmartHouseButtons btn : SmartHouseButtons.values())
+
+        for (SmartHouseButtons btn : SmartHouseButtons.values())
             buttonValueDataSource.addButtonValue(new ButtonValue(btn));
 
         udpValueDataSource.addUdpValue(new UdpValue(Constants.DEFAULT_IP, Constants.DEFAULT_PORT));
@@ -109,128 +114,126 @@ public class MainActivity extends Activity {
     }
 
 
-	private void createButtons() {
-		// TODO Auto-generated method stub
-		buttonsAdapter = new SmartHouseButtonsAdapter(this);
-		keypadGrid = (GridView) findViewById(R.id.grdButtons);
+    private void createButtons() {
+        // TODO Auto-generated method stub
+        buttonsAdapter = new SmartHouseButtonsAdapter(this);
+        keypadGrid = (GridView) findViewById(R.id.grdButtons);
 
-		keypadGrid.setAdapter(buttonsAdapter);
+        keypadGrid.setAdapter(buttonsAdapter);
 
-		buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
-		buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
-	}
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle presses on the action bar items
-		switch (item.getItemId()) {
-		case R.id.ip_settings:
-			openIpSettings();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
-	private void openIpSettings() {
-		// TODO Auto-generated method stub
-		Intent intent = new Intent(this, IpSettingsActivity.class);
-		startActivity(intent);
-	}
-
-	private void sendData(View view) {
-		context = getApplicationContext();
-
-		if(!isWifiConnected()) {
-			showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
-			return;
-		}
-
-		textIp = "";
-		textPort = "";
-
-		String host = textIp;
-		if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
-			showShortToast(Constants.INVALID_IP_ERROR_MESSAGE);
-			return;
-		}
-
-		String port = textPort;
-		if (!port.matches("^(6553[0-5]|655[0-2]\\d|65[0-4]\\d\\d|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}|0)$")) {
-			showShortToast(Constants.INVALID_PORT_ERROR_MESSAGE);
-			return;
-		}
-
-		String dataText = "";
-		String dataHex = "";
-		if (dataText.length() < 1 && dataHex.length() < 2) {
-			showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
-			return;
-		}
-		String uriString = "udp://" + host + ":" + port + "/";
-		if (dataHex.length() >= 2) {
-			uriString += Uri.encode("0x" + dataHex);
-		} else {
-			uriString += Uri.encode(dataText);
-		}
-		Uri uri = Uri.parse(uriString);
-		Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-		intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-		intent.addCategory(Intent.CATEGORY_DEFAULT);
-
-		startActivity(intent);
-	}
+        buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
+        buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
+    }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	private boolean isWifiConnected() {
-		ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.ip_settings:
+                openIpSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-		return mWifi.isConnected();
-	}
+    private void openIpSettings() {
+        // TODO Auto-generated method stub
+        Intent intent = new Intent(this, IpSettingsActivity.class);
+        startActivity(intent);
+    }
 
-	void showShortToast(String text)
-	{
-	    if(currentToast != null)
-	    {
-	        currentToast.cancel();
-	    }
-	    currentToast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-	    currentToast.show();
+    private void sendData(View view) {
+        context = getApplicationContext();
 
-	}
+        if (!isWifiConnected()) {
+            showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
+            return;
+        }
+
+        textIp = "";
+        textPort = "";
+
+        String host = textIp;
+        if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
+            showShortToast(Constants.INVALID_IP_ERROR_MESSAGE);
+            return;
+        }
+
+        String port = textPort;
+        if (!port.matches("^(6553[0-5]|655[0-2]\\d|65[0-4]\\d\\d|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}|0)$")) {
+            showShortToast(Constants.INVALID_PORT_ERROR_MESSAGE);
+            return;
+        }
+
+        String dataText = "";
+        String dataHex = "";
+        if (dataText.length() < 1 && dataHex.length() < 2) {
+            showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
+            return;
+        }
+        String uriString = "udp://" + host + ":" + port + "/";
+        if (dataHex.length() >= 2) {
+            uriString += Uri.encode("0x" + dataHex);
+        } else {
+            uriString += Uri.encode(dataText);
+        }
+        Uri uri = Uri.parse(uriString);
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+
+        startActivity(intent);
+    }
+
+
+    private boolean isWifiConnected() {
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        return mWifi.isConnected();
+    }
+
+    void showShortToast(String text) {
+        if (currentToast != null) {
+            currentToast.cancel();
+        }
+        currentToast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+        currentToast.show();
+
+    }
 
 
     private static final int TCP_SERVER_PORT = 21111;
-	private void runTcpClient() {
-    	try {
-			Socket s = new Socket("localhost", TCP_SERVER_PORT);
-			BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-			//send output msg
-			String outMsg = "TCP connecting to " + TCP_SERVER_PORT + System.getProperty("line.separator");
-			out.write(outMsg);
-			out.flush();
-			Log.i("TcpClient", "sent: " + outMsg);
-			//accept server response
-			String inMsg = in.readLine() + System.getProperty("line.separator");
-			Log.i("TcpClient", "received: " + inMsg);
-			//close connection
-			s.close();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+    private void runTcpClient() {
+        try {
+            Socket s = new Socket("localhost", TCP_SERVER_PORT);
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+            //send output msg
+            String outMsg = "TCP connecting to " + TCP_SERVER_PORT + System.getProperty("line.separator");
+            out.write(outMsg);
+            out.flush();
+            Log.i("TcpClient", "sent: " + outMsg);
+            //accept server response
+            String inMsg = in.readLine() + System.getProperty("line.separator");
+            Log.i("TcpClient", "received: " + inMsg);
+            //close connection
+            s.close();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-	//replace runTcpClient() at onCreate with this method if you want to run tcp client as a service
+    //replace runTcpClient() at onCreate with this method if you want to run tcp client as a service
 
 }

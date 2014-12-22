@@ -75,7 +75,7 @@ public final class Constants
 
 	public final static String BUTTON_NAME = "com.house.smart.remote.BUTTON.NAME";
 
-	public final static String BUTTON_STRING = "com.house.smart.remote.BUTTON.STRIMG";
+	public final static String BUTTON_ID = "com.house.smart.remote.BUTTON.STRIMG";
 
 	public final static int BUTTONS_NUMBER = 15;
 

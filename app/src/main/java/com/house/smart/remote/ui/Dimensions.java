@@ -1,4 +1,4 @@
-package com.house.smart.remote;
+package com.house.smart.remote.ui;
 
 public class Dimensions {
 
