@@ -1,4 +1,4 @@
-package com.house.smart.remote;
+package com.house.smart.remote.tcp;
 
 import android.content.Context;
 import android.content.Intent;

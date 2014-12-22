@@ -1,4 +1,4 @@
-package com.house.smart.remote;
+package com.house.smart.remote.udp;
 
 import android.content.Context;
 import android.net.Uri;
@@ -6,11 +6,14 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.house.smart.remote.Constants;
+import com.house.smart.remote.R;
+
 import java.io.IOException;
 import java.net.*;
 
-import static com.house.smart.remote.HexHelper.bytesToHex;
-import static com.house.smart.remote.HexHelper.hexStringToBytes;
+import static com.house.smart.remote.udp.HexHelper.bytesToHex;
+import static com.house.smart.remote.udp.HexHelper.hexStringToBytes;
 
 public class UdpSender {
     final Handler toastHandler = new Handler();

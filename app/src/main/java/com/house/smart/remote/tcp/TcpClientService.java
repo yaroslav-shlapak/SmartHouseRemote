@@ -1,4 +1,4 @@
-package com.house.smart.remote;
+package com.house.smart.remote.tcp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

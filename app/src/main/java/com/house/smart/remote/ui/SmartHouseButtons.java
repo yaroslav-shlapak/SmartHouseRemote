@@ -1,4 +1,4 @@
-package com.house.smart.remote;
+package com.house.smart.remote.ui;
 
 
 public enum SmartHouseButtons {
@@ -14,6 +14,14 @@ public enum SmartHouseButtons {
     BUTTON10(9, "BUTTON10", "9", SmartHouseButtonsType.SENDING_BUTTON),
     BUTTON11(10, "BUTTON11", "10", SmartHouseButtonsType.SENDING_BUTTON),
     BUTTON12(11, "BUTTON12", "11", SmartHouseButtonsType.SENDING_BUTTON);
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
 
     String name;
     int id;
