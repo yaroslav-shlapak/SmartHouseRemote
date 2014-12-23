@@ -59,11 +59,14 @@ public class IpSettingsActivity extends Activity {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_undo:
+                udpValueDataSource.close();
 	        	finish();
 	            return true;
 	        case R.id.action_accept:
                 UdpValue udpValue = new UdpValue(1, etIp.getText().toString(), etPort.getText().toString());
                 udpValueDataSource.updateUdpValue(udpValue);
+
+                udpValueDataSource.close();
 	    		finish();
 	            return true;
 	        default:
