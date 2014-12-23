@@ -82,10 +82,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 	}
 
 	// Create and populate keypad buttons array with CalculatorButton values
-	private SmartHouseButtons[] mButtons = { SmartHouseButtons.BUTTON1, SmartHouseButtons.BUTTON2, SmartHouseButtons.BUTTON3,
-			SmartHouseButtons.BUTTON4, SmartHouseButtons.BUTTON5, SmartHouseButtons.BUTTON6, SmartHouseButtons.BUTTON7,
-			SmartHouseButtons.BUTTON8, SmartHouseButtons.BUTTON9, SmartHouseButtons.BUTTON10, SmartHouseButtons.BUTTON11, 
-			SmartHouseButtons.BUTTON12};
+	private SmartHouseButtons[] mButtons = SmartHouseButtons.values();
 
     private void getButtonSize() {
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();

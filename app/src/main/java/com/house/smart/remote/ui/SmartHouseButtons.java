@@ -15,32 +15,12 @@ public enum SmartHouseButtons {
     BUTTON11(10, "BUTTON11", "10", SmartHouseButtonsType.SENDING_BUTTON),
     BUTTON12(11, "BUTTON12", "11", SmartHouseButtonsType.SENDING_BUTTON);
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setString(String string) {
-        this.string = string;
-    }
-
-    String name;
-    int id;
-
-    public String getString() {
-        return string;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    String string;
-
-    SmartHouseButtonsType category;
+    private static final int size = SmartHouseButtons.values().length;
+    private String name;
+    private int id;
+    private String string;
+    private String image;
+    private SmartHouseButtonsType category;
 
     SmartHouseButtons(int id, String name, String string, SmartHouseButtonsType category) {
         this.name = name;
@@ -53,7 +33,33 @@ public enum SmartHouseButtons {
         return size;
     }
 
-    private static final int size = SmartHouseButtons.values().length;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getString() {
+        return string;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
 
 }

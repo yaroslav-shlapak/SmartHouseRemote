@@ -66,8 +66,7 @@ public class ButtonValueDataSource extends ValueDataSource {
             do {
                 ButtonValue buttonValue = new ButtonValue();
                 buttonValue.setId(Integer.parseInt(cursor.getString(0)));
-                buttonValue.setButtonImage(cursor.getString(1));
-                buttonValue.setButtonString(cursor.getString(2));
+                buttonValue.setButtonString(cursor.getString(1));
                 // Adding contact to list
                 buttonValuesList.add(buttonValue);
             } while (cursor.moveToNext());
