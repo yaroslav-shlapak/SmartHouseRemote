@@ -58,7 +58,7 @@ public class ButtonValueDataSource extends ValueDataSource {
 
         List<ButtonValue> buttonValuesList = new ArrayList<ButtonValue>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + SmartHouseSQLiteHelper.BUTTONS_TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + SmartHouseSQLiteHelper.BUTTONS_TABLE_NAME;
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
@@ -66,7 +66,8 @@ public class ButtonValueDataSource extends ValueDataSource {
             do {
                 ButtonValue buttonValue = new ButtonValue();
                 buttonValue.setId(Integer.parseInt(cursor.getString(0)));
-                buttonValue.setButtonString(cursor.getString(1));
+                buttonValue.setButtonName(cursor.getString(1));
+                buttonValue.setButtonString(cursor.getString(2));
                 // Adding contact to list
                 buttonValuesList.add(buttonValue);
             } while (cursor.moveToNext());

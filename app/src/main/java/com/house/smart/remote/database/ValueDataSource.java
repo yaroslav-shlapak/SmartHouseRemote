@@ -26,7 +26,7 @@ public class ValueDataSource {
         this.dbHelper.close();
     }
 
-    public boolean isTableExisting(String tableName, int tableRowsNumber) {
+    protected boolean isTableExisting(String tableName, int tableRowsNumber) {
         Cursor cursor = db.rawQuery("SELECT count(*) FROM " + tableName, null);
         cursor.moveToFirst();
         int count = cursor.getInt(0);

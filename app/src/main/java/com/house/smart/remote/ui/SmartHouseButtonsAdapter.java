@@ -86,7 +86,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 
     private void getButtonSize() {
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
-        buttonsSize.height = (metrics.heightPixels - 200) / 4;
+        buttonsSize.height = (metrics.heightPixels - 175) / 5;
         buttonsSize.width = (metrics.widthPixels - 75) / 3;
     }
 }

@@ -19,8 +19,8 @@ import com.house.smart.remote.ui.SmartHouseButtons;
 public class ButtonsSettingsActivity extends Activity {
 
     private EditText buttonName, buttonString;
-    int buttonId;
-    ButtonValueDataSource buttonValueDataSource;
+    private int buttonId;
+    private ButtonValueDataSource buttonValueDataSource;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

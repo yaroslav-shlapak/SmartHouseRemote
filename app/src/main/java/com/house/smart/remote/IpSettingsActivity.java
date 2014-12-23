@@ -4,14 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.EditText;
 
+import com.house.smart.remote.database.ButtonValueDataSource;
+import com.house.smart.remote.database.UdpValue;
+import com.house.smart.remote.database.UdpValueDataSource;
+
 public class IpSettingsActivity extends Activity {
-	private Context context;
-	private SharedPreferences sharedPrefIp, sharedPrefPort;
+	private UdpValueDataSource udpValueDataSource;
 	private EditText etIp, etPort;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +26,15 @@ public class IpSettingsActivity extends Activity {
 		
 		etIp = (EditText) findViewById(R.id.ip_address);
 		etPort = (EditText) findViewById(R.id.port_address);
-		context = getApplicationContext();
-		sharedPrefIp = context.getSharedPreferences(getString(R.string.preference_ip), Context.MODE_PRIVATE);
-		sharedPrefPort = context.getSharedPreferences(getString(R.string.preference_port), Context.MODE_PRIVATE);
-		
-		String defaultIp = getResources().getString(R.string.defaultIP);
-		String defaultPort = getResources().getString(R.string.defaultPort);
-		
-		String textIp = sharedPrefIp.getString(getString(R.string.preference_ip), defaultIp);
-		String textPort = sharedPrefPort.getString(getString(R.string.preference_port), defaultPort);
+
+        udpValueDataSource = new UdpValueDataSource(this);
+        udpValueDataSource.open();
+
+        Log.v("IpSettings", "database opened");
+		String textIp = udpValueDataSource.getUdpValue(1).getIp();
+		String textPort = udpValueDataSource.getUdpValue(1).getPort();
+
+        Log.v("IpSettings", "database read");
 		
 		etIp.setText(textIp);
 		etPort.setText(textPort);
@@ -44,6 +48,12 @@ public class IpSettingsActivity extends Activity {
 		
 		
 	}
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        udpValueDataSource.close();
+    }
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
@@ -52,12 +62,8 @@ public class IpSettingsActivity extends Activity {
 	        	finish();
 	            return true;
 	        case R.id.action_accept:
-	    		SharedPreferences.Editor editorIp = sharedPrefIp.edit();
-	    		SharedPreferences.Editor editorPort = sharedPrefPort.edit();
-	    		editorIp.putString(getString(R.string.preference_ip), etIp.getText().toString());
-	    		editorPort.putString(getString(R.string.preference_port), etPort.getText().toString());
-	    		editorIp.commit();
-	    		editorPort.commit();
+                UdpValue udpValue = new UdpValue(1, etIp.getText().toString(), etPort.getText().toString());
+                udpValueDataSource.updateUdpValue(udpValue);
 	    		finish();
 	            return true;
 	        default:

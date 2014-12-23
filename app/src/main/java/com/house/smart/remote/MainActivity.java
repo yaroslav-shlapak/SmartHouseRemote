@@ -34,16 +34,15 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class MainActivity extends Activity {
+    private static final int TCP_SERVER_PORT = 21111;
+    UdpValueDataSource udpValueDataSource;
+    ButtonValueDataSource buttonValueDataSource;
     private Context context;
     private SharedPreferences sharedPrefIp, sharedPrefPort;
-    private String textIp, textPort, defaultIp, defaultPort;
+    private String textIp, textPort;
     private Toast currentToast;
     private SmartHouseButtonsAdapter buttonsAdapter;
     private GridView keypadGrid;
-    UdpValueDataSource udpValueDataSource;
-    ButtonValueDataSource buttonValueDataSource;
-
-
     private OnClickListener buttonOnClickListener = new OnClickListener() {
 
         @Override
@@ -82,7 +81,6 @@ public class MainActivity extends Activity {
         finish();*/
     }
 
-
     public void onResume() {
         super.onResume();
         buttonsAdapter.notifyDataSetChanged();
@@ -97,7 +95,6 @@ public class MainActivity extends Activity {
         buttonValueDataSource.close();
     }
 
-
     private void initDatabase() {
         udpValueDataSource = new UdpValueDataSource(this);
         buttonValueDataSource = new ButtonValueDataSource(this);
@@ -109,10 +106,9 @@ public class MainActivity extends Activity {
         for (SmartHouseButtons btn : SmartHouseButtons.values())
             buttonValueDataSource.addButtonValue(new ButtonValue(btn));
 
-        udpValueDataSource.addUdpValue(new UdpValue(Constants.DEFAULT_IP, Constants.DEFAULT_PORT));
+        udpValueDataSource.addUdpValue(new UdpValue(1, Constants.DEFAULT_IP, Constants.DEFAULT_PORT));
 
     }
-
 
     private void createButtons() {
         // TODO Auto-generated method stub
@@ -124,7 +120,6 @@ public class MainActivity extends Activity {
         buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
         buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -158,8 +153,8 @@ public class MainActivity extends Activity {
             return;
         }
 
-        textIp = "";
-        textPort = "";
+        textIp = udpValueDataSource.getUdpValue(1).getIp();
+        textPort = udpValueDataSource.getUdpValue(1).getPort();
 
         String host = textIp;
         if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
@@ -193,7 +188,6 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-
     private boolean isWifiConnected() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -209,9 +203,6 @@ public class MainActivity extends Activity {
         currentToast.show();
 
     }
-
-
-    private static final int TCP_SERVER_PORT = 21111;
 
     private void runTcpClient() {
         try {

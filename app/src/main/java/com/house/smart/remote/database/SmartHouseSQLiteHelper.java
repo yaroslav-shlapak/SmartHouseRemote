@@ -27,7 +27,7 @@ public class SmartHouseSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String UDP_TABLE_CREATE = "create table "
             + UDP_TABLE_NAME + "(" + COLUMN_ID
-            + " integer primary key, " + COLUMN_IP + " text, " + COLUMN_PORT + " text);";
+            + " integer primary key, " + COLUMN_IP + " text not null, " + COLUMN_PORT + " text not null);";
 
 
     public SmartHouseSQLiteHelper(Context context) {

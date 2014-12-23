@@ -13,7 +13,10 @@ public enum SmartHouseButtons {
     BUTTON9(8, "BUTTON9", "8", SmartHouseButtonsType.SENDING_BUTTON),
     BUTTON10(9, "BUTTON10", "9", SmartHouseButtonsType.SENDING_BUTTON),
     BUTTON11(10, "BUTTON11", "10", SmartHouseButtonsType.SENDING_BUTTON),
-    BUTTON12(11, "BUTTON12", "11", SmartHouseButtonsType.SENDING_BUTTON);
+    BUTTON12(11, "BUTTON12", "11", SmartHouseButtonsType.SENDING_BUTTON),
+    BUTTON13(12, "BUTTON13", "11", SmartHouseButtonsType.SENDING_BUTTON),
+    BUTTON14(13, "BUTTON14", "11", SmartHouseButtonsType.SENDING_BUTTON),
+    BUTTON15(14, "BUTTON15", "11", SmartHouseButtonsType.SENDING_BUTTON);
 
     private static final int size = SmartHouseButtons.values().length;
     private String name;

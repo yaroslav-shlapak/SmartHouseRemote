@@ -23,7 +23,7 @@ public class UdpValueDataSource extends ValueDataSource{
 
     public void addUdpValue(UdpValue udpValue) {
 
-        if (!isTableExisting(SmartHouseSQLiteHelper.UDP_TABLE_NAME, 0)) {
+        if (!isTableExisting(SmartHouseSQLiteHelper.UDP_TABLE_NAME, 1)) {
                 ContentValues values = new ContentValues();
             values.put(SmartHouseSQLiteHelper.COLUMN_ID, udpValue.getId());
             values.put(SmartHouseSQLiteHelper.COLUMN_IP, udpValue.getIp());
@@ -84,20 +84,20 @@ public class UdpValueDataSource extends ValueDataSource{
         return cursor.getCount();
     }
 
-    public int updateUdpValue(ButtonValue buttonValue) {
+    public int updateUdpValue(UdpValue udpValue) {
 
         ContentValues values = new ContentValues();
-        values.put(SmartHouseSQLiteHelper.COLUMN_IP, buttonValue.getButtonName());
-        values.put(SmartHouseSQLiteHelper.COLUMN_PORT, buttonValue.getButtonString());
+        values.put(SmartHouseSQLiteHelper.COLUMN_IP, udpValue.getIp());
+        values.put(SmartHouseSQLiteHelper.COLUMN_PORT, udpValue.getPort());
 
         // updating row
         return db.update(SmartHouseSQLiteHelper.UDP_TABLE_NAME, values, SmartHouseSQLiteHelper.COLUMN_ID + " = ?",
-                new String[] { String.valueOf(buttonValue.getId()) });
+                new String[] { String.valueOf(udpValue.getId()) });
     }
 
-    public void deleteUdpValue(ButtonValue buttonValue) {
+    public void deleteUdpValue(UdpValue udpValue) {
         db.delete(SmartHouseSQLiteHelper.UDP_TABLE_NAME, SmartHouseSQLiteHelper.COLUMN_ID + " = ?",
-                new String[] { String.valueOf(buttonValue.getId()) });
+                new String[] { String.valueOf(udpValue.getId()) });
         db.close();
     }
 }
