@@ -152,9 +152,11 @@ public class MainActivity extends Activity {
             showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
             return;
         }
-
+        udpValueDataSource.open();
         textIp = udpValueDataSource.getUdpValue(1).getIp();
         textPort = udpValueDataSource.getUdpValue(1).getPort();
+        udpValueDataSource.close();
+        Log.v("UDPsend", "data was received from database");
 
         String host = textIp;
         if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
@@ -168,7 +170,10 @@ public class MainActivity extends Activity {
             return;
         }
 
-        String dataText = "";
+        SmartHouseButtons btn = (SmartHouseButtons) view.getTag();
+        buttonValueDataSource.open();
+        String dataText = buttonValueDataSource.getButtonValue(btn.getId()).getButtonString();
+        buttonValueDataSource.close();
         String dataHex = "";
         if (dataText.length() < 1 && dataHex.length() < 2) {
             showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
@@ -184,7 +189,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
-
+        Log.v("UDPsend", "before starting intent");
         startActivity(intent);
     }
 

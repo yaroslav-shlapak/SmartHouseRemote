@@ -12,9 +12,6 @@ import com.house.smart.remote.R;
 import java.io.IOException;
 import java.net.*;
 
-import static com.house.smart.remote.udp.HexHelper.bytesToHex;
-import static com.house.smart.remote.udp.HexHelper.hexStringToBytes;
-
 public class UdpSender {
     final Handler toastHandler = new Handler();
     public void SendTo(final Context context, final Uri uri) {
@@ -32,7 +29,7 @@ public class UdpSender {
             	Toast.makeText(context, "ERROR: Invalid hex values", Toast.LENGTH_LONG).show();
             	return;
             }
-            msgBytes = hexStringToBytes(msg);
+            msgBytes = HexHelper.hexStringToBytes(msg);
         }
 
         final byte[] buf = msgBytes;
@@ -40,7 +37,7 @@ public class UdpSender {
         String appName = context.getString(R.string.app_name);
         if(Constants.IS_LOGGABLE) {
             Log.d(appName, new String(msgBytes));
-            Log.d(appName, "0x" + bytesToHex(msgBytes));
+            Log.d(appName, "0x" + HexHelper.bytesToHex(msgBytes));
         }
 
         new Thread(new Runnable() {

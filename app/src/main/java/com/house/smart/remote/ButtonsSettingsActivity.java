@@ -28,8 +28,7 @@ public class ButtonsSettingsActivity extends Activity {
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        buttonValueDataSource = new ButtonValueDataSource(this);
-        buttonValueDataSource.open();
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null)
@@ -41,8 +40,11 @@ public class ButtonsSettingsActivity extends Activity {
         buttonString = (EditText) findViewById(R.id.buttonString);
         Log.v("onLongClick", "editText was initialized");
 
+        buttonValueDataSource = new ButtonValueDataSource(this);
+        buttonValueDataSource.open();
         String textButtonName = buttonValueDataSource.getButtonValue(buttonId).getButtonName();
         String textButtonString = buttonValueDataSource.getButtonValue(buttonId).getButtonString();
+
         Log.v("onLongClick", "data received from database");
 
         buttonName.setText(textButtonName);
@@ -69,6 +71,7 @@ public class ButtonsSettingsActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.action_undo:
                 finish();
+                buttonValueDataSource.close();
                 return true;
             case R.id.action_accept:
                 SmartHouseButtons btn = SmartHouseButtons.values()[buttonId];
@@ -76,6 +79,7 @@ public class ButtonsSettingsActivity extends Activity {
                 btn.setString(buttonString.getText().toString());
 
                 buttonValueDataSource.updateButtonValue(new ButtonValue(btn));
+                buttonValueDataSource.close();
                 finish();
                 return true;
             default:
