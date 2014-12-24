@@ -3,12 +3,15 @@ package com.house.smart.remote.ui;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+
+import com.house.smart.remote.R;
 
 
 public class SmartHouseButtonsAdapter extends BaseAdapter {
@@ -57,7 +60,8 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 									// attributes
 
 			btn = new Button(mContext);
-
+            LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            btn = (Button) li.inflate(R.layout.button_style, null);
             getButtonSize();
             btn.setWidth(buttonsSize.width);
             btn.setHeight(buttonsSize.height);
@@ -86,7 +90,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 
     private void getButtonSize() {
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
-        buttonsSize.height = (metrics.heightPixels - 175) / 5;
-        buttonsSize.width = (metrics.widthPixels - 75) / 3;
+        buttonsSize.height = (metrics.heightPixels - 125) / 5;
+        buttonsSize.width = (metrics.widthPixels) / 3;
     }
 }

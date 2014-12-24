@@ -231,30 +231,32 @@ containing a value of this type.
         public static final int ic_action_settings=0x7f020001;
         public static final int ic_action_undo=0x7f020002;
         public static final int ic_launcher=0x7f020003;
-        public static final int notification_item_background_color=0x7f020004;
-        public static final int notification_item_background_color_pressed=0x7f020005;
-        public static final int notification_template_icon_bg=0x7f020006;
-        public static final int notification_template_icon_low_bg=0x7f020007;
-        public static final int safe_mode_background=0x7f020008;
-        public static final int screen_background_dark=0x7f020009;
-        public static final int screen_background_dark_transparent=0x7f02000a;
-        public static final int screen_background_holo_dark=0x7f02000b;
-        public static final int screen_background_holo_light=0x7f02000c;
-        public static final int screen_background_light=0x7f02000d;
-        public static final int screen_background_light_transparent=0x7f02000e;
-        public static final int search_bar_default_color=0x7f02000f;
-        public static final int selected_day_background=0x7f020010;
-        public static final int status_bar_closed_default_background=0x7f020011;
-        public static final int status_bar_opened_default_background=0x7f020012;
+        public static final int notification_item_background_color=0x7f020005;
+        public static final int notification_item_background_color_pressed=0x7f020006;
+        public static final int notification_template_icon_bg=0x7f020007;
+        public static final int notification_template_icon_low_bg=0x7f020008;
+        public static final int regular_button=0x7f020004;
+        public static final int safe_mode_background=0x7f020009;
+        public static final int screen_background_dark=0x7f02000a;
+        public static final int screen_background_dark_transparent=0x7f02000b;
+        public static final int screen_background_holo_dark=0x7f02000c;
+        public static final int screen_background_holo_light=0x7f02000d;
+        public static final int screen_background_light=0x7f02000e;
+        public static final int screen_background_light_transparent=0x7f02000f;
+        public static final int search_bar_default_color=0x7f020010;
+        public static final int selected_day_background=0x7f020011;
+        public static final int status_bar_closed_default_background=0x7f020012;
+        public static final int status_bar_opened_default_background=0x7f020013;
     }
     public static final class id {
-        public static final int action_accept=0x7f09001e;
-        public static final int action_undo=0x7f09001d;
+        public static final int action_accept=0x7f09001f;
+        public static final int action_undo=0x7f09001e;
         public static final int alignBounds=0x7f090002;
         public static final int alignMargins=0x7f090003;
         public static final int bottom=0x7f090004;
         public static final int buttonName=0x7f090015;
         public static final int buttonString=0x7f090016;
+        public static final int button_send=0x7f09001c;
         public static final int center=0x7f090005;
         public static final int center_horizontal=0x7f090006;
         public static final int center_vertical=0x7f090007;
@@ -267,7 +269,7 @@ containing a value of this type.
         public static final int grdButtons=0x7f09001b;
         public static final int horizontal=0x7f090000;
         public static final int ip_address=0x7f090019;
-        public static final int ip_settings=0x7f09001c;
+        public static final int ip_settings=0x7f09001d;
         public static final int left=0x7f09000e;
         public static final int port_address=0x7f09001a;
         public static final int relativeLayout1=0x7f090012;
@@ -284,6 +286,7 @@ containing a value of this type.
         public static final int activity_button_settings=0x7f030000;
         public static final int activity_ip_settings=0x7f030001;
         public static final int activity_main=0x7f030002;
+        public static final int button_style=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -349,6 +352,7 @@ containing a value of this type.
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int button_text=0x7f070002;
     }
     public static final class styleable {
         /** Attributes that can be used with a GridLayout.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="accessibility_focus_highlight">#80ffff00</color>
     <color name="background_dark">#ff000000</color>
@@ -96,14 +96,14 @@
     <color name="white">#ffffffff</color>
     <declare-styleable name="GridLayout"><attr name="orientation"><enum name="horizontal" value="0"/><enum name="vertical" value="1"/></attr><attr format="integer" name="rowCount"/><attr format="integer" name="columnCount"/><attr format="boolean" name="useDefaultMargins"/><attr name="alignmentMode"><enum name="alignBounds" value="0"/><enum name="alignMargins" value="1"/></attr><attr format="boolean" name="rowOrderPreserved"/><attr format="boolean" name="columnOrderPreserved"/></declare-styleable>
     <declare-styleable name="GridLayout_Layout"><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_margin"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginRight"/><attr name="android:layout_marginBottom"/><attr format="integer" name="layout_row"/><attr format="integer" min="1" name="layout_rowSpan"/><attr format="integer" name="layout_column"/><attr format="integer" min="1" name="layout_columnSpan"/><attr name="layout_gravity"><flag name="top" value="0x30"/><flag name="bottom" value="0x50"/><flag name="left" value="0x03"/><flag name="right" value="0x05"/><flag name="center_vertical" value="0x10"/><flag name="fill_vertical" value="0x70"/><flag name="center_horizontal" value="0x01"/><flag name="fill_horizontal" value="0x07"/><flag name="center" value="0x11"/><flag name="fill" value="0x77"/><flag name="clip_vertical" value="0x80"/><flag name="clip_horizontal" value="0x08"/><flag name="start" value="0x00800003"/><flag name="end" value="0x00800005"/></attr></declare-styleable>
-    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/18.0.0/res/values/values.xml -->
+    <dimen name="activity_vertical_margin">50dp</dimen>
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/18.0.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="default_gap">16dip</dimen>
-    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <drawable name="notification_item_background_color">#ff111111</drawable>
     <drawable name="notification_item_background_color_pressed">#ff454545</drawable>
@@ -120,7 +120,7 @@
     <drawable name="selected_day_background">#ff0092f4</drawable>
     <drawable name="status_bar_closed_default_background">#ff000000</drawable>
     <drawable name="status_bar_opened_default_background">#ff000000</drawable>
-    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_accept">Accept</string>
     <string name="action_settings">Settings</string>
@@ -166,7 +166,7 @@
     <string name="textViewButtonString">Button sending string</string>
     <string name="textViewIp">IP address</string>
     <string name="textViewPort">Port</string>
-    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
@@ -177,5 +177,18 @@
     </style>
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="button_text">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
     </style>
 </resources>
