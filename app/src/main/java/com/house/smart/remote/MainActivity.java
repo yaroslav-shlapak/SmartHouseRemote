@@ -116,7 +116,8 @@ public class MainActivity extends Activity {
         keypadGrid = (GridView) findViewById(R.id.grdButtons);
 
         keypadGrid.setAdapter(buttonsAdapter);
-
+        for (SmartHouseButtons btn : SmartHouseButtons.values())
+            buttonValueDataSource.getButtonValue(btn.getId()).getButtonName();
         buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
         buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
     }
