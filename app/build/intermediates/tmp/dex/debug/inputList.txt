@@ -1,3 +1,6 @@
-C:\Users\Void\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\classes\debug
-C:\Users\Void\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\pre-dexed\debug\classes-e5036d074591f69c994d63b80a0f130384b12203.jar
-C:\Users\Void\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-cc21f285eced292a41c178d699c274028c8dd35b.jar
+C:\Users\y.shlapak\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\classes\debug
+C:\Users\y.shlapak\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-b116cfa6226d2d47e66d62444f612a89ac645e88.jar
+C:\Users\y.shlapak\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\pre-dexed\debug\classes-ce2f0b33f8aba1638a1657dd9d0e03d3f0ed105c.jar
+C:\Users\y.shlapak\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-edbea4d94f5bd37a8ac8a4bddbe0753ae8bc9e4b.jar
+C:\Users\y.shlapak\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\pre-dexed\debug\classes-c3ab2acf0f0ba42624f6455aa9f0ea5599cde221.jar
+C:\Users\y.shlapak\AndroidstudioProjects\SmartHouseRemote\app\build\intermediates\pre-dexed\debug\classes-e56897bb768f8d2cf89bb934c7f13e4e06f927c0.jar
