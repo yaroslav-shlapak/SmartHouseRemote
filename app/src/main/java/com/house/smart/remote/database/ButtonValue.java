@@ -5,9 +5,33 @@ import com.house.smart.remote.ui.SmartHouseButtons;
 public class ButtonValue {
 
 	private long id;
-	private String buttonName;
+
+    public ButtonValue(long id, String buttonName, String buttonString, String buttonHexValue, int buttonHexAddOption) {
+        this.id = id;
+        this.buttonName = buttonName;
+        this.buttonString = buttonString;
+        this.buttonHexAddOption = buttonHexAddOption;
+        this.buttonHexValue = buttonHexValue;
+    }
+
+    private String buttonName;
 	private String buttonString;
 	private String buttonImage;
+    private int buttonHexAddOption;
+    private String buttonHexValue;
+
+    public String getButtonHexValue() {
+        return buttonHexValue;
+    }
+    public void setButtonHexValue(String buttonHexValue) {
+        this.buttonHexValue = buttonHexValue;
+    }
+    public int getButtonHexAddOption() {
+        return buttonHexAddOption;
+    }
+    public void setButtonHexAddOption(int buttonHexAddOption) {
+        this.buttonHexAddOption = buttonHexAddOption;
+    }
 	public long getId() {
 		return id;
 	}
