@@ -1268,6 +1268,13 @@
         <item name="android:listChoiceIndicatorMultiple">@drawable/abc_btn_check_material</item>
     </style>
     <style name="Platform.AppCompat.Light.Dialog" parent="Platform.AppCompat.Dialog"/>
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="Raise.Button" parent="android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/raised_button_background</item>
+    </style>
+    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <style name="RtlOverlay.Widget.AppCompat.ActionBar.TitleItem" parent="android:Widget">
         <item name="android:layout_gravity">center_vertical|left</item>
         <item name="android:paddingRight">8dp</item>

@@ -64,7 +64,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 
 			btn = new Button(mContext);
             LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            btn = (Button) li.inflate(R.layout.button_style, null);
+            btn = (Button) li.inflate(R.layout.raised_button, null);
             getButtonSize();
             btn.setWidth(buttonsSize.width);
             btn.setHeight(buttonsSize.height);
