@@ -61,6 +61,49 @@
 
             <requestFocus />
         </EditText>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkBoxHexText"
+            android:id="@+id/checkBoxHex"
+            android:layout_below="@+id/buttonString"
+            android:textColor="@color/white"
+            android:checked="false"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:id="@+id/layoutHex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkBoxHex"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/textViewHex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:gravity="left"
+                android:text="@string/textViewHexText"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+
+            <EditText
+                android:id="@+id/editTextHex"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_centerHorizontal="true"
+                android:inputType="text"
+                android:text="@string/editTextHex"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@null"
+                android:textSize="30sp" />
+
+
+            </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout><!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/layout/activity_button_settings.xml -->
