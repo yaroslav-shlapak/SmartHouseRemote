@@ -12,12 +12,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 
 import com.house.smart.remote.R;
+import com.house.smart.remote.database.ButtonValueDataSource;
 
 
 public class SmartHouseButtonsAdapter extends BaseAdapter {
 	private Context mContext;
     private Dimensions buttonsSize = new Dimensions();
     Button btn;
+    ButtonValueDataSource buttonValueDataSource;
 
 	// Declare button click listener variable
 	private OnClickListener buttonOnClickListener;
@@ -38,6 +40,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 
 	public SmartHouseButtonsAdapter(Context c) {
         mContext = c;
+        buttonValueDataSource = new ButtonValueDataSource(c);
         Log.v("SmartHouseButtonsAdapter", "SmartHouseButtonsAdapter was created");
 	}
 
@@ -61,7 +64,7 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 
 			btn = new Button(mContext);
             LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            btn = (Button) li.inflate(R.layout.button_style, null);
+            btn = (Button) li.inflate(R.layout.raised_button, null);
             getButtonSize();
             btn.setWidth(buttonsSize.width);
             btn.setHeight(buttonsSize.height);
@@ -80,8 +83,9 @@ public class SmartHouseButtonsAdapter extends BaseAdapter {
 		} else {
 			btn = (Button) convertView;
 		}
-
-		btn.setText(mButtons[position].getName());
+        buttonValueDataSource.open();
+		btn.setText(buttonValueDataSource.getButtonValue(mButtons[position].getId()).getButtonName());
+        buttonValueDataSource.close();
 		return btn;
 	}
 

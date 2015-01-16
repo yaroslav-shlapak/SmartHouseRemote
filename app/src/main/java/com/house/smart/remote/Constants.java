@@ -76,7 +76,9 @@ public final class Constants
 	public final static String BUTTON_ID = "com.house.smart.remote.BUTTON.STRIMG";
     public final static String DEFAULT_IP = "192.168.0.103";
     public final static String DEFAULT_PORT = "1153";
-    public static final String DEFAULT_BUTTON_NAME= "Press and hold to modify";
+    public static final String DEFAULT_BUTTON_NAME = "Press and hold to modify";
+    public static final String DEFAULT_BUTTON_HEX_VALUE = "0x00";
+    public static final int DEFAULT_BUTTON_HEX_OPTION = 0;
 
     /**
      * Private constructor prevents instantiation.

@@ -27,6 +27,8 @@ public class ButtonValueDataSource extends ValueDataSource {
             values.put(SmartHouseSQLiteHelper.COLUMN_ID, buttonValue.getId());
             values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_NAME, buttonValue.getButtonName());
             values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_STRING, buttonValue.getButtonString());
+            values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_HEX_VALUE, buttonValue.getButtonHexValue());
+            values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_HEX_OPTION, buttonValue.getButtonHexOption());
 
             long insertId = db.insert(SmartHouseSQLiteHelper.BUTTONS_TABLE_NAME, null,
                     values);
@@ -48,7 +50,7 @@ public class ButtonValueDataSource extends ValueDataSource {
             cursor.moveToFirst();
 
         if (cursor != null) {
-            return new ButtonValue(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+            return new ButtonValue(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
         }
         return null;
     }
@@ -90,6 +92,8 @@ public class ButtonValueDataSource extends ValueDataSource {
         ContentValues values = new ContentValues();
         values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_NAME, buttonValue.getButtonName());
         values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_STRING, buttonValue.getButtonString());
+        values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_HEX_VALUE, buttonValue.getButtonHexValue());
+        values.put(SmartHouseSQLiteHelper.COLUMN_BUTTON_HEX_OPTION, buttonValue.getButtonHexOption());
 
         // updating row
         return db.update(SmartHouseSQLiteHelper.BUTTONS_TABLE_NAME, values, SmartHouseSQLiteHelper.COLUMN_ID + " = ?",

@@ -14,6 +14,8 @@ public class SmartHouseSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_BUTTON_NAME = "button_name";
     public static final String COLUMN_BUTTON_STRING = "button_string";
     //public static final String COLUMN_BUTTON_IMAGE = "button_image";
+    public static final String COLUMN_BUTTON_HEX_VALUE = "hex_value";
+    public static final String COLUMN_BUTTON_HEX_OPTION = "hex_option";
     public static final String COLUMN_IP = "ip";
     public static final String COLUMN_PORT = "port";
     public static final String DATABASE_NAME = "smarthouseremote.db";
@@ -23,7 +25,7 @@ public class SmartHouseSQLiteHelper extends SQLiteOpenHelper {
     private static final String BUTTONS_TABLE_CREATE = "create table "
             + BUTTONS_TABLE_NAME + "(" + COLUMN_ID
             + " integer primary key, " + COLUMN_BUTTON_NAME + " text not null," + COLUMN_BUTTON_STRING /*+ " text not null," + COLUMN_BUTTON_IMAGE*/
-            + " text not null);";
+            + " text not null," + COLUMN_BUTTON_HEX_VALUE + " text not null," + COLUMN_BUTTON_HEX_OPTION + " integer not null"  + ");";
 
     private static final String UDP_TABLE_CREATE = "create table "
             + UDP_TABLE_NAME + "(" + COLUMN_ID

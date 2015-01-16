@@ -1,17 +1,47 @@
 package com.house.smart.remote.database;
 
+import com.house.smart.remote.Constants;
 import com.house.smart.remote.ui.SmartHouseButtons;
 
 public class ButtonValue {
 
-	private long id;
+	private int id;
 	private String buttonName;
-	private String buttonString;
+
+    public ButtonValue(int id, String buttonName, String buttonString, String buttonHexValue, int buttonHexOption) {
+        this.id = id;
+        this.buttonName = buttonName;
+        this.buttonString = buttonString;
+        this.buttonHexValue = buttonHexValue;
+        this.buttonHexOption = buttonHexOption;
+    }
+
+    private String buttonString;
 	private String buttonImage;
-	public long getId() {
+    private String buttonHexValue;
+
+    public int getButtonHexOption() {
+        return buttonHexOption;
+    }
+
+    public void setButtonHexOption(int buttonHexOption) {
+        this.buttonHexOption = buttonHexOption;
+    }
+
+    public String getButtonHexValue() {
+        return buttonHexValue;
+    }
+
+    public void setButtonHexValue(String buttonHexValue) {
+        this.buttonHexValue = buttonHexValue;
+    }
+
+    private int buttonHexOption;
+
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getButtonName() {
@@ -49,8 +79,6 @@ public class ButtonValue {
     }
 
     public ButtonValue(SmartHouseButtons smartHouseButtons) {
-        this.buttonName = smartHouseButtons.getName();
-        this.buttonString = smartHouseButtons.getString();
-        this.id = smartHouseButtons.getId();
+        this(smartHouseButtons.getId(), smartHouseButtons.getName(), smartHouseButtons.getString(), Constants.DEFAULT_BUTTON_HEX_VALUE, Constants.DEFAULT_BUTTON_HEX_OPTION);
     }
 }

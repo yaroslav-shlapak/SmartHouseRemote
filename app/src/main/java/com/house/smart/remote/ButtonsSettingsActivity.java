@@ -10,7 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.house.smart.remote.database.ButtonValue;
 import com.house.smart.remote.database.ButtonValueDataSource;
@@ -20,15 +23,30 @@ public class ButtonsSettingsActivity extends Activity {
 
     private EditText buttonName, buttonString;
     private int buttonId;
+    private CheckBox checkBoxHex;
+    private LinearLayout linearLayoutHex;
     private ButtonValueDataSource buttonValueDataSource;
+
+    private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            boolean checked = ((CheckBox) buttonView).isChecked();
+
+            // Check which checkbox was clicked
+            if (checked) {
+                for (int i = 0; i < linearLayoutHex.getChildCount(); i++) {
+                    View v = linearLayoutHex.getChildAt(i);
+                    v.setEnabled(false); // Or whatever you want to do with the view.
+                }
+            }
+        }
+    };
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button_settings);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         Bundle extras = getIntent().getExtras();
         if (extras != null)
@@ -50,6 +68,10 @@ public class ButtonsSettingsActivity extends Activity {
         buttonName.setText(textButtonName);
         buttonString.setText(textButtonString);
         Log.v("onLongClick", "on create ended");
+
+        checkBoxHex = (CheckBox) findViewById(R.id.checkBoxHex);
+        checkBoxHex.setOnCheckedChangeListener(onCheckedChangeListener);
+        linearLayoutHex = (LinearLayout) findViewById(R.id.layoutHex);
 
     }
 
@@ -86,4 +108,5 @@ public class ButtonsSettingsActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
