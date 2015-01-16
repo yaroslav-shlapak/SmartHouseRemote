@@ -19,7 +19,9 @@ public class ButtonValueDataSource extends ValueDataSource {
         super(context);
     }
 
-    private final String[] allColumns = {SmartHouseSQLiteHelper.COLUMN_ID, SmartHouseSQLiteHelper.COLUMN_BUTTON_NAME, SmartHouseSQLiteHelper.COLUMN_BUTTON_STRING};
+    private final String[] allColumns = {SmartHouseSQLiteHelper.COLUMN_ID, SmartHouseSQLiteHelper.COLUMN_BUTTON_NAME, SmartHouseSQLiteHelper.COLUMN_BUTTON_STRING,
+            SmartHouseSQLiteHelper.COLUMN_BUTTON_HEX_VALUE, SmartHouseSQLiteHelper.COLUMN_BUTTON_HEX_OPTION};
+
     public void addButtonValue(ButtonValue buttonValue) {
 
         if (!isTableExisting(SmartHouseSQLiteHelper.BUTTONS_TABLE_NAME, SmartHouseButtons.getSize())) {
@@ -48,9 +50,10 @@ public class ButtonValueDataSource extends ValueDataSource {
                 SmartHouseSQLiteHelper.COLUMN_ID + "=?", new String[] {String.valueOf(id)}, null, null, null, null);
         if(cursor != null)
             cursor.moveToFirst();
-
+/*        for(int i = 0; i < 4; i++)
+            Log.v("ButtonValueDataSource", cursor.getString(i));*/
         if (cursor != null) {
-            return new ButtonValue(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+            return new ButtonValue(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), Integer.parseInt(cursor.getString(4)));
         }
         return null;
     }

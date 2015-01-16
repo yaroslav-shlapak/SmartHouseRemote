@@ -113,11 +113,18 @@ public class MainActivity extends Activity {
     private void createButtons() {
         // TODO Auto-generated method stub
         buttonsAdapter = new SmartHouseButtonsAdapter(this);
+        Log.v("MainActivity", "SmartHouseButtonsAdapter was created");
         keypadGrid = (GridView) findViewById(R.id.grdButtons);
+        Log.v("MainActivity", "keypadGrid was initialized");
 
         keypadGrid.setAdapter(buttonsAdapter);
+        Log.v("MainActivity", "buttonsAdapter was set");
+
         for (SmartHouseButtons btn : SmartHouseButtons.values())
             buttonValueDataSource.getButtonValue(btn.getId()).getButtonName();
+
+        Log.v("MainActivity", "Buttons was added");
+
         buttonsAdapter.setButtonOnClickListener(buttonOnClickListener);
         buttonsAdapter.setButtonOnLongClickListener(buttonOnLongClickListener);
     }

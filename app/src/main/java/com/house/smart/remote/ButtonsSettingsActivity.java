@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.house.smart.remote.database.ButtonValue;
 import com.house.smart.remote.database.ButtonValueDataSource;
@@ -21,25 +22,20 @@ import com.house.smart.remote.ui.SmartHouseButtons;
 
 public class ButtonsSettingsActivity extends Activity {
 
-    private EditText buttonName, buttonString;
+    private EditText buttonName, buttonString, buttonStringHex;
     private int buttonId;
     private CheckBox checkBoxHex;
     private LinearLayout linearLayoutHex;
+    private TextView buttonStringHexLabel;
     private ButtonValueDataSource buttonValueDataSource;
 
     private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            boolean checked = ((CheckBox) buttonView).isChecked();
-
-            // Check which checkbox was clicked
-            if (checked) {
-                for (int i = 0; i < linearLayoutHex.getChildCount(); i++) {
-                    View v = linearLayoutHex.getChildAt(i);
-                    v.setEnabled(false); // Or whatever you want to do with the view.
-                }
-            }
+            onCheckBoxChanged(buttonView, true);
+            Log.v("ButtonsSettingsActivity.onCheckedChangeListener", "here is Johnny!");
         }
+
     };
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +52,36 @@ public class ButtonsSettingsActivity extends Activity {
         Log.v("onLongClick", "extra was received");
         buttonName = (EditText) findViewById(R.id.buttonName);
         buttonString = (EditText) findViewById(R.id.buttonString);
+        checkBoxHex = (CheckBox) findViewById(R.id.checkBoxHex);
+        checkBoxHex.setOnCheckedChangeListener(onCheckedChangeListener);
+        linearLayoutHex = (LinearLayout) findViewById(R.id.layoutHex);
+        buttonStringHex = (EditText) findViewById(R.id.editTextHex);
+        buttonStringHexLabel = (TextView) findViewById(R.id.textViewHex);
         Log.v("onLongClick", "editText was initialized");
 
         buttonValueDataSource = new ButtonValueDataSource(this);
         buttonValueDataSource.open();
         String textButtonName = buttonValueDataSource.getButtonValue(buttonId).getButtonName();
         String textButtonString = buttonValueDataSource.getButtonValue(buttonId).getButtonString();
+        String textButtonStringHex = buttonValueDataSource.getButtonValue(buttonId).getButtonHexValue();
+        int checkBoxOption = buttonValueDataSource.getButtonValue(buttonId).getButtonHexOption();
 
         Log.v("onLongClick", "data received from database");
 
         buttonName.setText(textButtonName);
         buttonString.setText(textButtonString);
+        buttonStringHex.setText(textButtonStringHex);
+        if(checkBoxOption == 0)
+            checkBoxHex.setChecked(false);
+        else if(checkBoxOption == 1)
+            checkBoxHex.setChecked(true);
         Log.v("onLongClick", "on create ended");
 
-        checkBoxHex = (CheckBox) findViewById(R.id.checkBoxHex);
-        checkBoxHex.setOnCheckedChangeListener(onCheckedChangeListener);
-        linearLayoutHex = (LinearLayout) findViewById(R.id.layoutHex);
 
+
+
+        onCheckBoxChanged(checkBoxHex, false);
+        buttonString.requestFocus();
     }
 
     @Override
@@ -97,16 +106,45 @@ public class ButtonsSettingsActivity extends Activity {
                 return true;
             case R.id.action_accept:
                 SmartHouseButtons btn = SmartHouseButtons.values()[buttonId];
-                btn.setName(buttonName.getText().toString());
-                btn.setString(buttonString.getText().toString());
+                ButtonValue btnValue = new ButtonValue(btn);
+                btnValue.setButtonName(buttonName.getText().toString());
+                btnValue.setButtonString(buttonString.getText().toString());
+                btnValue.setButtonHexValue(buttonStringHex.getText().toString());
+                if(checkBoxHex.isChecked())
+                    btnValue.setButtonHexOption(1);
+                else
+                    btnValue.setButtonHexOption(0);
 
-                buttonValueDataSource.updateButtonValue(new ButtonValue(btn));
+                buttonValueDataSource.updateButtonValue(btnValue);
                 buttonValueDataSource.close();
+
+
                 finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void onCheckBoxChanged(CompoundButton buttonView, boolean enableFocusRequesting) {
+
+        boolean checked = ((CheckBox) checkBoxHex).isChecked();
+
+        if (checked) {
+            buttonStringHexLabel.setEnabled(true);
+            buttonStringHex.setEnabled(true);
+            buttonStringHexLabel.setTextColor(getResources().getColor(R.color.white));
+            buttonStringHex.setTextColor(getResources().getColor(R.color.white));
+            if(enableFocusRequesting)
+                buttonStringHex.requestFocus();
+        } else {
+            buttonStringHexLabel.setEnabled(false);
+            buttonStringHex.setEnabled(false);
+            buttonStringHexLabel.setTextColor(getResources().getColor(R.color.dim_foreground_inverse_disabled_holo_light));
+            buttonStringHex.setTextColor(getResources().getColor(R.color.dim_foreground_inverse_disabled_holo_light));
+        }
+    }
+
+
 
 }
