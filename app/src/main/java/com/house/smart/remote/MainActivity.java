@@ -22,6 +22,7 @@ import com.house.smart.remote.database.ButtonValue;
 import com.house.smart.remote.database.ButtonValueDataSource;
 import com.house.smart.remote.database.UdpValue;
 import com.house.smart.remote.database.UdpValueDataSource;
+import com.house.smart.remote.udp.SendToUriActivity;
 import com.house.smart.remote.ui.SmartHouseButtons;
 import com.house.smart.remote.ui.SmartHouseButtonsAdapter;
 
@@ -181,6 +182,8 @@ public class MainActivity extends Activity {
         SmartHouseButtons btn = (SmartHouseButtons) view.getTag();
         buttonValueDataSource.open();
         String dataText = buttonValueDataSource.getButtonValue(btn.getId()).getButtonString();
+        if(buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexOption() == 1)
+            dataText += Integer.toHexString(Integer.decode(buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexValue()));
         buttonValueDataSource.close();
         String dataHex = "";
         if (dataText.length() < 1 && dataHex.length() < 2) {
@@ -194,10 +197,12 @@ public class MainActivity extends Activity {
             uriString += Uri.encode(dataText);
         }
         Uri uri = Uri.parse(uriString);
-        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        Intent intent = new Intent(context, SendToUriActivity.class);
+        intent.setData(uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        //intent.addCategory(Intent.CATEGORY_DEFAULT);
         Log.v("UDPsend", "before starting intent");
+        Log.v("UDPsend", dataText);
         startActivity(intent);
     }
 
