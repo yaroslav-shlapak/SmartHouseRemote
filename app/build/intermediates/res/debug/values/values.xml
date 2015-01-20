@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -18,47 +18,47 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="accessibility_focus_highlight">#80ffff00</color>
     <color name="background_dark">#ff000000</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="background_floating_material_dark">#ff424242</color>
     <color name="background_floating_material_light">#ffeeeeee</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="background_holo_dark">#ff000000</color>
     <color name="background_holo_light">#fff3f3f3</color>
     <color name="background_light">#ffffffff</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="background_material_dark">#ff303030</color>
     <color name="background_material_light">#ffeeeeee</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="black">#ff000000</color>
     <color name="bright_foreground_dark">@android:color/background_light</color>
     <color name="bright_foreground_dark_disabled">#80ffffff</color>
     <color name="bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
     <color name="bright_foreground_disabled_holo_light">#ffb2b2b2</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="bright_foreground_light">@android:color/background_dark</color>
     <color name="bright_foreground_light_disabled">#80000000</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="darker_gray">#aaa</color>
     <color name="dim_foreground_dark">#bebebe</color>
@@ -67,11 +67,11 @@
     <color name="dim_foreground_dark_inverse_disabled">#80323232</color>
     <color name="dim_foreground_disabled_holo_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_holo_light">#80323232</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="dim_foreground_holo_dark">#bebebe</color>
     <color name="dim_foreground_holo_light">#323232</color>
@@ -83,11 +83,11 @@
     <color name="dim_foreground_light_disabled">#80323232</color>
     <color name="dim_foreground_light_inverse">#bebebe</color>
     <color name="dim_foreground_light_inverse_disabled">#80bebebe</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="facelock_spotlight_mask">#CC000000</color>
     <color name="group_button_dialog_focused_holo_dark">#2699cc00</color>
@@ -98,21 +98,21 @@
     <color name="highlighted_text_holo_dark">#6633b5e5</color>
     <color name="highlighted_text_holo_light">#6633b5e5</color>
     <color name="highlighted_text_light">#9983CC39</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="hint_foreground_dark">#808080</color>
     <color name="hint_foreground_holo_dark">#808080</color>
     <color name="hint_foreground_holo_light">#808080</color>
     <color name="hint_foreground_light">#808080</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="holo_blue_bright">#ff00ddff</color>
     <color name="holo_blue_dark">#ff0099cc</color>
@@ -147,29 +147,29 @@
     <color name="link_text_holo_dark">#5c5cff</color>
     <color name="link_text_holo_light">#0000ee</color>
     <color name="link_text_light">#0000ee</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="lockscreen_clock_am_pm">#ffffffff</color>
     <color name="lockscreen_clock_background">#ffffffff</color>
     <color name="lockscreen_clock_foreground">#ffffffff</color>
     <color name="lockscreen_owner_info">#ff9a9a9a</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="material_blue_grey_800">#ff37474f</color>
     <color name="material_blue_grey_900">#ff263238</color>
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="perms_costs_money">#ffffbb33</color>
     <color name="perms_dangerous_grp_color">#33b5e5</color>
     <color name="perms_dangerous_perm_color">#33b5e5</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
@@ -181,29 +181,29 @@
     <color name="primary_text_disabled_material_light">#39000000</color>
     <color name="ripple_material_dark">#40ffffff</color>
     <color name="ripple_material_light">#40000000</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="safe_mode_text">#80ffffff</color>
     <color name="search_url_text_normal">#7fa87f</color>
     <color name="search_url_text_pressed">@android:color/black</color>
     <color name="search_url_text_selected">@android:color/black</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="shadow">#cc222222</color>
     <color name="sliding_tab_text_color_active">@android:color/black</color>
     <color name="sliding_tab_text_color_shadow">@android:color/black</color>
     <color name="suggestion_highlight_text">#177bbd</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="transparent">#00000000</color>
     <color name="white">#ffffffff</color>
@@ -232,7 +232,7 @@
     <declare-styleable name="Toolbar"><attr format="reference" name="titleTextAppearance"/><attr format="reference" name="subtitleTextAppearance"/><attr name="title"/><attr name="subtitle"/><attr name="android:gravity"/><attr format="dimension" name="titleMargins"/><attr format="dimension" name="titleMarginStart"/><attr format="dimension" name="titleMarginEnd"/><attr format="dimension" name="titleMarginTop"/><attr format="dimension" name="titleMarginBottom"/><attr name="contentInsetStart"/><attr name="contentInsetEnd"/><attr name="contentInsetLeft"/><attr name="contentInsetRight"/><attr format="dimension" name="maxButtonHeight"/><attr format="reference" name="theme"/><attr format="reference" name="collapseIcon"/><attr format="string" name="collapseContentDescription"/><attr name="popupTheme"/><attr format="reference" name="navigationIcon"/><attr format="string" name="navigationContentDescription"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
     <dimen name="abc_action_bar_default_padding_material">4dp</dimen>
@@ -271,14 +271,14 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">50dp</dimen>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/18.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/18.0.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="default_gap">16dip</dimen>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -286,7 +286,7 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <drawable name="notification_item_background_color">#ff111111</drawable>
     <drawable name="notification_item_background_color_pressed">#ff454545</drawable>
@@ -303,7 +303,7 @@
     <drawable name="selected_day_background">#ff0092f4</drawable>
     <drawable name="status_bar_closed_default_background">#ff000000</drawable>
     <drawable name="status_bar_opened_default_background">#ff000000</drawable>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
@@ -331,7 +331,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_accept">Accept</string>
     <string name="action_settings">Settings</string>
@@ -350,7 +350,7 @@
     <string name="textViewHexText">HEX value</string>
     <string name="textViewIp">IP address</string>
     <string name="textViewPort">Port</string>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
@@ -362,7 +362,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">
         <item name="android:textColor">?android:textColorPrimary</item>
@@ -1241,12 +1241,12 @@
         <item name="android:listChoiceIndicatorMultiple">@drawable/abc_btn_check_material</item>
     </style>
     <style name="Platform.AppCompat.Light.Dialog" parent="Platform.AppCompat.Dialog"/>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="Raise.Button" parent="android:style/Widget.Material.Button">
         <item name="android:background">@drawable/raised_button_background</item>
     </style>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="RtlOverlay.Widget.AppCompat.ActionBar.TitleItem" parent="android:Widget">
         <item name="android:layout_gravity">center_vertical|left</item>
@@ -1407,7 +1407,7 @@
     <style name="Widget.AppCompat.Spinner.DropDown.ActionBar" parent="Base.Widget.AppCompat.Spinner.DropDown.ActionBar"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="button_text">
         <item name="android:layout_width">fill_parent</item>

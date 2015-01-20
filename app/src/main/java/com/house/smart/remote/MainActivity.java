@@ -161,10 +161,10 @@ public class MainActivity extends Activity {
     private void sendData(View view) {
         context = getApplicationContext();
 
-/*        if (!isWifiConnected()) {
+        if (!isWifiConnected()) {
             showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
             return;
-        }*/
+        }
         udpValueDataSource.open();
         textIp = udpValueDataSource.getUdpValue(1).getIp();
         textPort = udpValueDataSource.getUdpValue(1).getPort();
@@ -247,12 +247,16 @@ public class MainActivity extends Activity {
     }
 
     private void runTcpClient() {
+        udpValueDataSource.open();
+        textIp = udpValueDataSource.getUdpValue(1).getIp();
+        textPort = udpValueDataSource.getUdpValue(1).getPort();
+        udpValueDataSource.close();
         try {
-            Socket s = new Socket("localhost", TCP_SERVER_PORT);
+            Socket s = new Socket("localhost", Integer.parseInt(textPort));
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
             //send output msg
-            String outMsg = "TCP connecting to " + TCP_SERVER_PORT + System.getProperty("line.separator");
+            String outMsg = "TCP connecting to " + textIp + System.getProperty("line.separator");
             out.write(outMsg);
             out.flush();
             Log.i("TcpClient", "sent: " + outMsg);
