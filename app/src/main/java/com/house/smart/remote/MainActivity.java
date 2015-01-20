@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,6 +58,9 @@ public class MainActivity extends Activity {
         @Override
         public boolean onLongClick(View v) {
             // TODO Auto-generated method stub
+            Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            vibrator.vibrate(50);
             Intent intent = new Intent(getApplicationContext(), ButtonsSettingsActivity.class);
             SmartHouseButtons btn = (SmartHouseButtons) v.getTag();
             Log.v("onLongClick", "btn was initialized");
@@ -157,10 +161,10 @@ public class MainActivity extends Activity {
     private void sendData(View view) {
         context = getApplicationContext();
 
-        if (!isWifiConnected()) {
+/*        if (!isWifiConnected()) {
             showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
             return;
-        }
+        }*/
         udpValueDataSource.open();
         textIp = udpValueDataSource.getUdpValue(1).getIp();
         textPort = udpValueDataSource.getUdpValue(1).getPort();
@@ -182,8 +186,28 @@ public class MainActivity extends Activity {
         SmartHouseButtons btn = (SmartHouseButtons) view.getTag();
         buttonValueDataSource.open();
         String dataText = buttonValueDataSource.getButtonValue(btn.getId()).getButtonString();
-        if(buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexOption() == 1)
-            dataText += Integer.toHexString(Integer.decode(buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexValue()));
+        if(buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexOption() == 1) {
+            dataText += buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexValue();
+            String newDataText = "";
+
+            for(int i = 0; i < (dataText.length() - 1); i++) {
+                if(dataText.charAt(i) == '\\') {
+                    if(dataText.charAt(i+1) == 'r') {
+                        newDataText += '\r';
+                    } else if(dataText.charAt(i+1) == 'n') {
+                        newDataText += '\n';
+                    } else {
+                        newDataText += '\\';
+                    }
+                    i++;
+                }
+                else {
+                    newDataText += dataText.charAt(i);
+                }
+            }
+            dataText = newDataText;
+        }
+
         buttonValueDataSource.close();
         String dataHex = "";
         if (dataText.length() < 1 && dataHex.length() < 2) {
