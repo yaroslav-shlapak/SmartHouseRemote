@@ -4,4 +4,4 @@
         android:color="?attr/colorControlHighlight">
         <item android:drawable="@color/holo_blue_light"/>
     </ripple>
-</selector><!-- From: file:/C:/Users/Void/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/drawable/raised_button_background.xml -->
+</selector><!-- From: file:/C:/Users/y.shlapak/AndroidstudioProjects/SmartHouseRemote/app/src/main/res/drawable/raised_button_background.xml -->
