@@ -1532,7 +1532,7 @@ containing a value of this type.
         public static final int status_bar_opened_default_background=0x7f020047;
     }
     public static final class id {
-        public static final int action_accept=0x7f080062;
+        public static final int action_accept=0x7f080065;
         public static final int action_bar=0x7f080042;
         public static final int action_bar_activity_content=0x7f080000;
         public static final int action_bar_container=0x7f080041;
@@ -1546,7 +1546,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f08003f;
         public static final int action_mode_bar_stub=0x7f08003e;
         public static final int action_mode_close_button=0x7f080031;
-        public static final int action_undo=0x7f080061;
+        public static final int action_undo=0x7f080064;
         public static final int activity_chooser_view_content=0x7f080032;
         public static final int alignBounds=0x7f080015;
         public static final int alignMargins=0x7f080016;
@@ -1555,7 +1555,7 @@ containing a value of this type.
         public static final int bottom=0x7f080017;
         public static final int buttonName=0x7f080053;
         public static final int buttonString=0x7f080054;
-        public static final int button_send=0x7f08005e;
+        public static final int button_send=0x7f080061;
         public static final int center=0x7f080018;
         public static final int center_horizontal=0x7f080019;
         public static final int center_vertical=0x7f08001a;
@@ -1577,7 +1577,7 @@ containing a value of this type.
         public static final int fill=0x7f08001e;
         public static final int fill_horizontal=0x7f08001f;
         public static final int fill_vertical=0x7f080020;
-        public static final int grdButtons=0x7f08005d;
+        public static final int grdButtons=0x7f080060;
         public static final int home=0x7f080004;
         public static final int homeAsUp=0x7f08000d;
         public static final int horizontal=0x7f080013;
@@ -1585,7 +1585,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f080029;
         public static final int image=0x7f080034;
         public static final int ip_address=0x7f08005b;
-        public static final int ip_settings=0x7f080060;
+        public static final int ip_settings=0x7f080063;
         public static final int layoutHex=0x7f080056;
         public static final int left=0x7f080021;
         public static final int listMode=0x7f080009;
@@ -1598,7 +1598,10 @@ containing a value of this type.
         public static final int progress_circular=0x7f080005;
         public static final int progress_horizontal=0x7f080006;
         public static final int radio=0x7f08003c;
-        public static final int raised_button=0x7f08005f;
+        public static final int radioButtonTcp=0x7f08005f;
+        public static final int radioButtonUdp=0x7f08005e;
+        public static final int radioGroupProtocol=0x7f08005d;
+        public static final int raised_button=0x7f080062;
         public static final int relativeLayout1=0x7f080050;
         public static final int right=0x7f080022;
         public static final int search_badge=0x7f080046;
@@ -1700,11 +1703,13 @@ containing a value of this type.
         public static final int ip_settings=0x7f0a0019;
         public static final int preference_ip=0x7f0a001a;
         public static final int preference_port=0x7f0a001b;
-        public static final int textViewButtonName=0x7f0a001c;
-        public static final int textViewButtonString=0x7f0a001d;
-        public static final int textViewHexText=0x7f0a001e;
-        public static final int textViewIp=0x7f0a001f;
-        public static final int textViewPort=0x7f0a0020;
+        public static final int radioButtonTcpText=0x7f0a001c;
+        public static final int radioButtonUdpText=0x7f0a001d;
+        public static final int textViewButtonName=0x7f0a001e;
+        public static final int textViewButtonString=0x7f0a001f;
+        public static final int textViewHexText=0x7f0a0020;
+        public static final int textViewIp=0x7f0a0021;
+        public static final int textViewPort=0x7f0a0022;
     }
     public static final class style {
         /** 

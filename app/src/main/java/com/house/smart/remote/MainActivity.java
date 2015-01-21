@@ -15,14 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.house.smart.remote.database.ButtonValue;
 import com.house.smart.remote.database.ButtonValueDataSource;
-import com.house.smart.remote.database.UdpValue;
-import com.house.smart.remote.database.UdpValueDataSource;
+import com.house.smart.remote.database.ProtocolValue;
+import com.house.smart.remote.database.ProtocolValueDataSource;
 import com.house.smart.remote.udp.SendToUriActivity;
 import com.house.smart.remote.ui.SmartHouseButtons;
 import com.house.smart.remote.ui.SmartHouseButtonsAdapter;
@@ -37,11 +36,10 @@ import java.net.UnknownHostException;
 
 public class MainActivity extends Activity {
     private static final int TCP_SERVER_PORT = 21111;
-    UdpValueDataSource udpValueDataSource;
+    ProtocolValueDataSource protocolValueDataSource;
     ButtonValueDataSource buttonValueDataSource;
     private Context context;
     private SharedPreferences sharedPrefIp, sharedPrefPort;
-    private String textIp, textPort;
     private Toast currentToast;
     private SmartHouseButtonsAdapter buttonsAdapter;
     private GridView keypadGrid;
@@ -49,7 +47,87 @@ public class MainActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            sendData(v);
+
+/*            if (!isWifiConnected()) {
+                showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
+                return;
+            }*/
+            SmartHouseButtons btn = (SmartHouseButtons) v.getTag();
+            protocolValueDataSource.open();
+            String textIp = protocolValueDataSource.getValue(1).getIp();
+            String textPort = protocolValueDataSource.getValue(1).getPort();
+            String protocolType = protocolValueDataSource.getValue(1).getProtocolType();
+            protocolValueDataSource.close();
+
+            Log.v("OnClickListener", "before hex logic");
+
+            buttonValueDataSource.open();
+            Log.v("OnClickListener", "reopen database");
+            String dataText = buttonValueDataSource.getButtonValue(btn.getId()).getButtonString();
+            if(buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexOption() == 1) {
+                dataText += buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexValue();
+                String newDataText = "";
+
+                for(int i = 0; i < (dataText.length() - 1); i++) {
+                    if(dataText.charAt(i) == '\\') {
+                        if(dataText.charAt(i+1) == 'r') {
+                            newDataText += '\r';
+                        } else if(dataText.charAt(i+1) == 'n') {
+                            newDataText += '\n';
+                        } else {
+                            newDataText += '\\';
+                        }
+                        i++;
+                    }
+                    else {
+                        newDataText += dataText.charAt(i);
+                    }
+                }
+                dataText = newDataText;
+            }
+
+            Log.v("OnClickListener", "before database closing");
+            buttonValueDataSource.close();
+
+            Log.v("OnClickListener", "data was received from database");
+
+            String host = textIp;
+            if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
+                showShortToast(Constants.INVALID_IP_ERROR_MESSAGE);
+                return;
+            }
+
+            String port = textPort;
+            if (!port.matches("^(6553[0-5]|655[0-2]\\d|65[0-4]\\d\\d|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}|0)$")) {
+                showShortToast(Constants.INVALID_PORT_ERROR_MESSAGE);
+                return;
+            }
+
+            String dataHex = "";
+            if (dataText.length() < 1 && dataHex.length() < 2) {
+                showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
+                return;
+            }
+            String uriString = "udp://" + host + ":" + port + "/";
+            if (dataHex.length() >= 2) {
+                uriString += Uri.encode("0x" + dataHex);
+            } else {
+                uriString += Uri.encode(dataText);
+            }
+            Uri uri = Uri.parse(uriString);
+
+            switch (protocolType) {
+                case Constants.PROTOCOL_UDP:
+                    sendData(v, uri, dataText);
+                    break;
+                case Constants.PROTOCOL_TCP:
+                    runTcpClient(host, port, dataText);
+                    break;
+                default:
+
+            }
+
+
         }
     };
 
@@ -96,22 +174,22 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
 
-        udpValueDataSource.close();
+        protocolValueDataSource.close();
         buttonValueDataSource.close();
     }
 
     private void initDatabase() {
-        udpValueDataSource = new UdpValueDataSource(this);
+        protocolValueDataSource = new ProtocolValueDataSource(this);
         buttonValueDataSource = new ButtonValueDataSource(this);
 
-        udpValueDataSource.open();
+        protocolValueDataSource.open();
         buttonValueDataSource.open();
 
 
         for (SmartHouseButtons btn : SmartHouseButtons.values())
             buttonValueDataSource.addButtonValue(new ButtonValue(btn));
 
-        udpValueDataSource.addUdpValue(new UdpValue(1, Constants.DEFAULT_IP, Constants.DEFAULT_PORT));
+        protocolValueDataSource.addValue(new ProtocolValue(1, Constants.DEFAULT_IP, Constants.DEFAULT_PORT, Constants.DEFAULT_PROTOCOL_TYPE));
 
     }
 
@@ -158,69 +236,8 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    private void sendData(View view) {
+    private void sendData(View view, Uri uri, String dataText) {
         context = getApplicationContext();
-
-        if (!isWifiConnected()) {
-            showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
-            return;
-        }
-        udpValueDataSource.open();
-        textIp = udpValueDataSource.getUdpValue(1).getIp();
-        textPort = udpValueDataSource.getUdpValue(1).getPort();
-        udpValueDataSource.close();
-        Log.v("UDPsend", "data was received from database");
-
-        String host = textIp;
-        if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
-            showShortToast(Constants.INVALID_IP_ERROR_MESSAGE);
-            return;
-        }
-
-        String port = textPort;
-        if (!port.matches("^(6553[0-5]|655[0-2]\\d|65[0-4]\\d\\d|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}|0)$")) {
-            showShortToast(Constants.INVALID_PORT_ERROR_MESSAGE);
-            return;
-        }
-
-        SmartHouseButtons btn = (SmartHouseButtons) view.getTag();
-        buttonValueDataSource.open();
-        String dataText = buttonValueDataSource.getButtonValue(btn.getId()).getButtonString();
-        if(buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexOption() == 1) {
-            dataText += buttonValueDataSource.getButtonValue(btn.getId()).getButtonHexValue();
-            String newDataText = "";
-
-            for(int i = 0; i < (dataText.length() - 1); i++) {
-                if(dataText.charAt(i) == '\\') {
-                    if(dataText.charAt(i+1) == 'r') {
-                        newDataText += '\r';
-                    } else if(dataText.charAt(i+1) == 'n') {
-                        newDataText += '\n';
-                    } else {
-                        newDataText += '\\';
-                    }
-                    i++;
-                }
-                else {
-                    newDataText += dataText.charAt(i);
-                }
-            }
-            dataText = newDataText;
-        }
-
-        buttonValueDataSource.close();
-        String dataHex = "";
-        if (dataText.length() < 1 && dataHex.length() < 2) {
-            showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
-            return;
-        }
-        String uriString = "udp://" + host + ":" + port + "/";
-        if (dataHex.length() >= 2) {
-            uriString += Uri.encode("0x" + dataHex);
-        } else {
-            uriString += Uri.encode(dataText);
-        }
-        Uri uri = Uri.parse(uriString);
         Intent intent = new Intent(context, SendToUriActivity.class);
         intent.setData(uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
@@ -246,20 +263,16 @@ public class MainActivity extends Activity {
 
     }
 
-    private void runTcpClient() {
-        udpValueDataSource.open();
-        textIp = udpValueDataSource.getUdpValue(1).getIp();
-        textPort = udpValueDataSource.getUdpValue(1).getPort();
-        udpValueDataSource.close();
+    private void runTcpClient(String textIp, String textPort, String textSendingData) {
         try {
-            Socket s = new Socket("localhost", Integer.parseInt(textPort));
+            int port = Integer.parseInt(textPort);
+            Socket s = new Socket("localhost", port);
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
             //send output msg
-            String outMsg = "TCP connecting to " + textIp + System.getProperty("line.separator");
-            out.write(outMsg);
+            out.write(textSendingData);
             out.flush();
-            Log.i("TcpClient", "sent: " + outMsg);
+            Log.i("TcpClient", "sent: " + textSendingData);
             //accept server response
             String inMsg = in.readLine() + System.getProperty("line.separator");
             Log.i("TcpClient", "received: " + inMsg);

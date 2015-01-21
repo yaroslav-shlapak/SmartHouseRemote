@@ -18,5 +18,7 @@
     <string name="textViewHexText">HEX value</string>
     <string name="checkBoxHexText">Add HEX</string>
     <string name="editTextHex">0x00</string>
+    <string name="radioButtonUdpText">UDP</string>
+    <string name="radioButtonTcpText">TCP</string>
 
 </resources>

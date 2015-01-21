@@ -345,6 +345,8 @@
     <string name="ip_settings">IP settings</string>
     <string name="preference_ip">preference_ip</string>
     <string name="preference_port">preference_port</string>
+    <string name="radioButtonTcpText">TCP</string>
+    <string name="radioButtonUdpText">UDP</string>
     <string name="textViewButtonName">Button name</string>
     <string name="textViewButtonString">Button sending string</string>
     <string name="textViewHexText">HEX value</string>

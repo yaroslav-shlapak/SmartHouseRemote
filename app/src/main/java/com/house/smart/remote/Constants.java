@@ -79,6 +79,9 @@ public final class Constants
     public static final String DEFAULT_BUTTON_NAME = "Press and hold to modify";
     public static final String DEFAULT_BUTTON_HEX_VALUE = "";
     public static final int DEFAULT_BUTTON_HEX_OPTION = 0;
+    public static final String DEFAULT_PROTOCOL_TYPE = "UDP";
+    public static final String PROTOCOL_TCP = "TCP";
+    public static final String PROTOCOL_UDP = "UDP";
 
     /**
      * Private constructor prevents instantiation.
