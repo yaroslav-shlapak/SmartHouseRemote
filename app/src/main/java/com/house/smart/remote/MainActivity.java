@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.house.smart.remote.database.ButtonValue;
 import com.house.smart.remote.database.ButtonValueDataSource;
 import com.house.smart.remote.database.ProtocolValue;
 import com.house.smart.remote.database.ProtocolValueDataSource;
+import com.house.smart.remote.tcp.TcpClient;
 import com.house.smart.remote.udp.SendToUriActivity;
 import com.house.smart.remote.ui.SmartHouseButtons;
 import com.house.smart.remote.ui.SmartHouseButtonsAdapter;
@@ -43,6 +45,10 @@ public class MainActivity extends Activity {
     private Toast currentToast;
     private SmartHouseButtonsAdapter buttonsAdapter;
     private GridView keypadGrid;
+    private TcpClient mTcpClient;
+    private String textIp;
+    private String textPort;
+
     private OnClickListener buttonOnClickListener = new OnClickListener() {
 
         @Override
@@ -52,10 +58,12 @@ public class MainActivity extends Activity {
                 showShortToast(Constants.WIFI_DISCONNECTED_MESSAGE);
                 return;
             }*/
+
+
             SmartHouseButtons btn = (SmartHouseButtons) v.getTag();
             protocolValueDataSource.open();
-            String textIp = protocolValueDataSource.getValue(1).getIp();
-            String textPort = protocolValueDataSource.getValue(1).getPort();
+            textIp = protocolValueDataSource.getValue(1).getIp();
+            textPort = protocolValueDataSource.getValue(1).getPort();
             String protocolType = protocolValueDataSource.getValue(1).getProtocolType();
             protocolValueDataSource.close();
 
@@ -116,12 +124,15 @@ public class MainActivity extends Activity {
             }
             Uri uri = Uri.parse(uriString);
 
+
+
             switch (protocolType) {
                 case Constants.PROTOCOL_UDP:
-                    sendData(v, uri, dataText);
+                    sendByUdp(v, uri, dataText);
                     break;
                 case Constants.PROTOCOL_TCP:
-                    runTcpClient(host, port, dataText);
+                    new ConnectTask().execute("");
+                    sendByTcp(host, port, dataText);
                     break;
                 default:
 
@@ -160,8 +171,7 @@ public class MainActivity extends Activity {
         createButtons();
 
 
-        /*runTcpClient();
-        finish();*/
+
     }
 
     public void onResume() {
@@ -176,6 +186,11 @@ public class MainActivity extends Activity {
 
         protocolValueDataSource.close();
         buttonValueDataSource.close();
+
+        if(mTcpClient != null) {
+            mTcpClient.stopClient();
+            mTcpClient = null;
+        }
     }
 
     private void initDatabase() {
@@ -236,7 +251,7 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    private void sendData(View view, Uri uri, String dataText) {
+    private void sendByUdp(View view, Uri uri, String dataText) {
         context = getApplicationContext();
         Intent intent = new Intent(context, SendToUriActivity.class);
         intent.setData(uri);
@@ -263,27 +278,49 @@ public class MainActivity extends Activity {
 
     }
 
-    private void runTcpClient(String textIp, String textPort, String textSendingData) {
-        try {
-            int port = Integer.parseInt(textPort);
-            Socket s = new Socket("localhost", port);
-            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-            //send output msg
-            out.write(textSendingData);
-            out.flush();
-            Log.i("TcpClient", "sent: " + textSendingData);
-            //accept server response
-            String inMsg = in.readLine() + System.getProperty("line.separator");
-            Log.i("TcpClient", "received: " + inMsg);
-            //close connection
-            s.close();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void sendByTcp(String textIp, String textPort, String textSendingData) {
+
+        Log.v("sendByTcp", "after AssignTask execution");
+        if (mTcpClient != null) {
+            mTcpClient.sendMessage(textSendingData);
+        }
+        mTcpClient.stopClient();
+        mTcpClient = null;
+
+
+    }
+
+    public class ConnectTask extends AsyncTask<String, String, TcpClient> {
+
+
+        @Override
+        protected TcpClient doInBackground(String... message) {
+            Log.v("sendByTcp", "before TcpClient creation");
+            //we create a TCPClient object and
+            mTcpClient = new TcpClient(new TcpClient.OnMessageReceived() {
+                @Override
+                //here the messageReceived method is implemented
+                public void messageReceived(String message) {
+                    //this method calls the onProgressUpdate
+                    publishProgress(message);
+                }
+            }, textIp, Integer.parseInt(textPort));
+            Log.v("sendByTcp", "after TcpClient creation");
+            mTcpClient.run();
+            Log.v("sendByTcp", "after TcpClient run");
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+            //in the arrayList we add the messaged received from server
+            //arrayList.add(values[0]);
+            // notify the adapter that the data set has changed. This means that new message received
+            // from server was added to the list
+           //mAdapter.notifyDataSetChanged();
         }
     }
-    //replace runTcpClient() at onCreate with this method if you want to run tcp client as a service
-
 }
