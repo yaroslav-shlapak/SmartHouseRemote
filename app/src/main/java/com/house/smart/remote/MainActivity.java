@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -23,31 +22,18 @@ import com.house.smart.remote.database.ButtonValue;
 import com.house.smart.remote.database.ButtonValueDataSource;
 import com.house.smart.remote.database.ProtocolValue;
 import com.house.smart.remote.database.ProtocolValueDataSource;
-import com.house.smart.remote.tcp.TcpClient;
+import com.house.smart.remote.tcp.SendToByTcpActivity;
 import com.house.smart.remote.udp.SendToUriActivity;
 import com.house.smart.remote.ui.SmartHouseButtons;
 import com.house.smart.remote.ui.SmartHouseButtonsAdapter;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
 public class MainActivity extends Activity {
-    private static final int TCP_SERVER_PORT = 21111;
     ProtocolValueDataSource protocolValueDataSource;
     ButtonValueDataSource buttonValueDataSource;
     private Context context;
     private SharedPreferences sharedPrefIp, sharedPrefPort;
     private Toast currentToast;
     private SmartHouseButtonsAdapter buttonsAdapter;
-    private GridView keypadGrid;
-    private TcpClient mTcpClient;
-    private String textIp;
-    private String textPort;
 
     private OnClickListener buttonOnClickListener = new OnClickListener() {
 
@@ -62,8 +48,8 @@ public class MainActivity extends Activity {
 
             SmartHouseButtons btn = (SmartHouseButtons) v.getTag();
             protocolValueDataSource.open();
-            textIp = protocolValueDataSource.getValue(1).getIp();
-            textPort = protocolValueDataSource.getValue(1).getPort();
+            String textIp = protocolValueDataSource.getValue(1).getIp();
+            String textPort = protocolValueDataSource.getValue(1).getPort();
             String protocolType = protocolValueDataSource.getValue(1).getProtocolType();
             protocolValueDataSource.close();
 
@@ -99,14 +85,12 @@ public class MainActivity extends Activity {
 
             Log.v("OnClickListener", "data was received from database");
 
-            String host = textIp;
-            if (!host.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
+            if (!textIp.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b")) {
                 showShortToast(Constants.INVALID_IP_ERROR_MESSAGE);
                 return;
             }
 
-            String port = textPort;
-            if (!port.matches("^(6553[0-5]|655[0-2]\\d|65[0-4]\\d\\d|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}|0)$")) {
+            if (!textPort.matches("^(6553[0-5]|655[0-2]\\d|65[0-4]\\d\\d|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}|0)$")) {
                 showShortToast(Constants.INVALID_PORT_ERROR_MESSAGE);
                 return;
             }
@@ -116,7 +100,7 @@ public class MainActivity extends Activity {
                 showShortToast(Constants.SENDING_CONTENT_ERROR_MESSAGE);
                 return;
             }
-            String uriString = "udp://" + host + ":" + port + "/";
+            String uriString = "udp://" + textIp + ":" + textPort + "/";
             if (dataHex.length() >= 2) {
                 uriString += Uri.encode("0x" + dataHex);
             } else {
@@ -128,11 +112,11 @@ public class MainActivity extends Activity {
 
             switch (protocolType) {
                 case Constants.PROTOCOL_UDP:
-                    sendByUdp(v, uri, dataText);
+                    sendByUdp(uri);
                     break;
                 case Constants.PROTOCOL_TCP:
-                    new ConnectTask().execute("");
-                    sendByTcp(host, port, dataText);
+
+                    sendByTcp(uri);
                     break;
                 default:
 
@@ -165,13 +149,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         initDatabase();
         createButtons();
-
-
-
     }
 
     public void onResume() {
@@ -187,10 +166,6 @@ public class MainActivity extends Activity {
         protocolValueDataSource.close();
         buttonValueDataSource.close();
 
-        if(mTcpClient != null) {
-            mTcpClient.stopClient();
-            mTcpClient = null;
-        }
     }
 
     private void initDatabase() {
@@ -212,7 +187,7 @@ public class MainActivity extends Activity {
         // TODO Auto-generated method stub
         buttonsAdapter = new SmartHouseButtonsAdapter(this);
         Log.v("MainActivity", "SmartHouseButtonsAdapter was created");
-        keypadGrid = (GridView) findViewById(R.id.grdButtons);
+        GridView keypadGrid = (GridView) findViewById(R.id.grdButtons);
         Log.v("MainActivity", "keypadGrid was initialized");
 
         keypadGrid.setAdapter(buttonsAdapter);
@@ -251,14 +226,12 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    private void sendByUdp(View view, Uri uri, String dataText) {
-        context = getApplicationContext();
-        Intent intent = new Intent(context, SendToUriActivity.class);
+    private void sendByUdp(Uri uri) {
+        Intent intent = new Intent(getApplicationContext(), SendToUriActivity.class);
         intent.setData(uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         //intent.addCategory(Intent.CATEGORY_DEFAULT);
         Log.v("UDPsend", "before starting intent");
-        Log.v("UDPsend", dataText);
         startActivity(intent);
     }
 
@@ -278,49 +251,13 @@ public class MainActivity extends Activity {
 
     }
 
-    private void sendByTcp(String textIp, String textPort, String textSendingData) {
-
-        Log.v("sendByTcp", "after AssignTask execution");
-        if (mTcpClient != null) {
-            mTcpClient.sendMessage(textSendingData);
-        }
-        mTcpClient.stopClient();
-        mTcpClient = null;
-
-
+    private void sendByTcp(Uri uri) {
+        Intent intent = new Intent(getApplicationContext(), SendToByTcpActivity.class);
+        intent.setData(uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+        //intent.addCategory(Intent.CATEGORY_DEFAULT);
+        Log.v("TCPsend", "before starting intent");
+        startActivity(intent);
     }
 
-    public class ConnectTask extends AsyncTask<String, String, TcpClient> {
-
-
-        @Override
-        protected TcpClient doInBackground(String... message) {
-            Log.v("sendByTcp", "before TcpClient creation");
-            //we create a TCPClient object and
-            mTcpClient = new TcpClient(new TcpClient.OnMessageReceived() {
-                @Override
-                //here the messageReceived method is implemented
-                public void messageReceived(String message) {
-                    //this method calls the onProgressUpdate
-                    publishProgress(message);
-                }
-            }, textIp, Integer.parseInt(textPort));
-            Log.v("sendByTcp", "after TcpClient creation");
-            mTcpClient.run();
-            Log.v("sendByTcp", "after TcpClient run");
-
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-
-            //in the arrayList we add the messaged received from server
-            //arrayList.add(values[0]);
-            // notify the adapter that the data set has changed. This means that new message received
-            // from server was added to the list
-           //mAdapter.notifyDataSetChanged();
-        }
-    }
 }
