@@ -175,7 +175,6 @@ public class MainActivity extends Activity {
         protocolValueDataSource.open();
         buttonValueDataSource.open();
 
-
         for (SmartHouseButtons btn : SmartHouseButtons.values())
             buttonValueDataSource.addButtonValue(new ButtonValue(btn));
 
